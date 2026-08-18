@@ -1,655 +1,282 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Narangga Adennas Shaputra | Multimedia Network Engineer & Auditor</title>
-  <meta name="description" content="Portofolio resmi Narangga Adennas Shaputra — Mahasiswa D4 Multimedia Network Engineer Politeknik Negeri Jakarta. Keahlian: Networking, Cybersecurity, Multimedia, & Finance Audit. Sertifikasi CCNA & Mikrotik BNSP.">
-  <meta name="keywords" content="Narangga Adennas Shaputra, Network Engineer, Auditor, Politeknik Negeri Jakarta, CCNA, Mikrotik BNSP, Portofolio">
-  <meta name="author" content="Narangga Adennas Shaputra">
-
-  <!-- OpenGraph Metadata (Untuk Tampilan Card Preview WhatsApp, LinkedIn, Twitter) -->
-  <meta property="og:title" content="Narangga Adennas Shaputra | Personal Portfolio">
-  <meta property="og:description" content="Undergraduate Student - D4 Multimedia Network Engineer, Politeknik Negeri Jakarta. Sertifikasi CCNA & Mikrotik BNSP.">
-  <meta property="og:image" content="assets/images/avatar.jpg">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="id_ID">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Narangga Adennas Shaputra | Portfolio">
-  <meta name="twitter:description" content="Network Engineering Student | Engineer's Discipline, Auditor's Eye for Detail.">
-  <meta name="twitter:image" content="assets/images/avatar.jpg">
-
-  <!-- Google Fonts Preconnect & Font Swap Performance Optimization -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Remixicon CDN for Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  
-  <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-  <!-- Navigation Bar -->
-  <header class="navbar" id="navbar">
-    <div class="container nav-container">
-      <a href="#hero" class="nav-logo" aria-label="Beranda Narangga.dev">
-        <span class="nav-logo-dot"></span>
-        <span class="brand-font">N4z<span class="gradient-text">.dev</span></span>
-      </a>
-
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#hero" class="nav-link active">Beranda</a></li>
-          <li><a href="#about" class="nav-link">Tentang</a></li>
-          <li><a href="#experience" class="nav-link">Pengalaman</a></li>
-          <li><a href="#education" class="nav-link">Pendidikan</a></li>
-          <li><a href="#projects" class="nav-link">Proyek</a></li>
-          <li><a href="#skills" class="nav-link">Keahlian</a></li>
-          <li><a href="#contact" class="nav-link">Kontak</a></li>
-        </ul>
-      </nav>
-
-      <div class="nav-actions">
-        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Dark/Light Theme">
-          <i class="ri-sun-line"></i>
-        </button>
-        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu Navigasi Mobile">
-          <i class="ri-menu-line"></i>
-        </button>
-        <a href="#contact" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem;">Hubungi Saya</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero-section" id="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-content">
-          <div class="status-badge scroll-animate fade-up delay-1">
-            <span class="status-dot"></span>
-            <span>Open for Opportunities & Collaborations</span>
-          </div>
-
-          <h1 class="hero-title scroll-animate fade-up delay-2">
-            Narangga Adennas Shaputra
-          </h1>
-
-          <p class="hero-tagline scroll-animate fade-up delay-3">
-            Network Engineering Student | Engineer's Discipline, Auditor's Eye for Detail.
-          </p>
-
-          <div class="hero-meta-list scroll-animate fade-up delay-3">
-            <div class="hero-meta-item">
-              <i class="ri-graduation-cap-line"></i>
-              <span>D4 Multimedia Network Engineer — Politeknik Negeri Jakarta</span>
-            </div>
-            <div class="hero-meta-item">
-              <i class="ri-map-pin-2-line"></i>
-              <span>Kota Depok, Jawa Barat</span>
-            </div>
-          </div>
-
-          <div class="hero-cta-group scroll-animate fade-up delay-4">
-            <a href="#projects" class="btn-primary">
-              <span>Lihat Proyek Saya</span>
-              <i class="ri-arrow-right-line"></i>
-            </a>
-            <a href="#contact" class="btn-secondary">
-              <i class="ri-contacts-book-2-line"></i>
-              <span>Kontak & Medsos</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="hero-avatar-container scroll-animate scale-up delay-3">
-          <div class="avatar-card tilt-card">
-            <div class="avatar-img-box">
-              <img src="assets/images/avatar.jpg" alt="Foto Narangga Adennas Shaputra" width="340" height="340">
-            </div>
-            <div class="avatar-badge-inline">
-              <div class="avatar-badge-icon">
-                <i class="ri-shield-check-fill"></i>
-              </div>
-              <div>
-                <div class="avatar-badge-title">Sertifikasi Resmi</div>
-                <div class="avatar-badge-val">CCNA & Mikrotik BNSP</div>
-              </div>
-            </div>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Right Resume</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Roboto:wght@300;400;500;700&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Roboto:wght@300;400;500;700&amp;display=swap" media="print" onload="this.media='all'"/>
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Roboto:wght@300;400;500;700&amp;display=swap"/>
+    </noscript>
+    <link href="css/font-awesome/css/all.min.css?ver=1.2.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?ver=1.2.0" rel="stylesheet">
+    <link href="css/aos.css?ver=1.2.0" rel="stylesheet">
+    <link href="css/main.css?ver=1.2.0" rel="stylesheet">
+    <noscript>
+      <style type="text/css">
+        [data-aos] {
+            opacity: 1 !important;
+            transform: translate(0) scale(1) !important;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body id="top">
+    <header class="d-print-none">
+      <div class="container text-center text-lg-left">
+        <div class="py-3 clearfix">
+          <h1 class="site-title mb-0">Joyce Harrison</h1>
+          <div class="site-nav">
+            <nav role="navigation">
+              <ul class="nav justify-content-center">
+                <li class="nav-item"><a class="nav-link" href="https://twitter.com/templateflip" title="Twitter"><i class="fab fa-twitter"></i><span class="menu-title sr-only">Twitter</span></a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="https://www.facebook.com/templateflip" title="Facebook"><i class="fab fa-facebook"></i><span class="menu-title sr-only">Facebook</span></a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="https://www.instagram.com/templateflip" title="Instagram"><i class="fab fa-instagram"></i><span class="menu-title sr-only">Instagram</span></a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/templateflip" title="Github"><i class="fab fa-github"></i><span class="menu-title sr-only">Github</span></a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section class="about-section" id="about">
-    <div class="container">
-      <div class="section-header scroll-animate fade-up">
-        <div class="section-tag">
-          <i class="ri-user-3-line"></i>
-          <span>Tentang Saya</span>
-        </div>
-        <h2 class="section-title">Minat Lintas Disiplin & Problem Solver</h2>
-        <p class="section-subtitle">Menggabungkan kedisiplinan teknik jaringan dengan ketelitian audit keuangan.</p>
+    </header>
+    <div class="page-content">
+      <div class="container">
+<div class="cover shadow-lg bg-white">
+  <div class="cover-bg p-3 p-lg-4 text-white">
+    <div class="row">
+      <div class="col-lg-4 col-md-5">
+        <div class="avatar hover-effect bg-white shadow-sm p-1"><img src="images/avatar.jpg" width="200" height="200"/></div>
       </div>
-
-      <div class="about-card scroll-animate scale-up">
-        <div class="about-grid">
-          <div class="about-text">
-            <h3 style="font-size: 1.5rem; margin-bottom: 16px;">Profil Ringkas</h3>
-            <p>
-              Mahasiswa D4 Multimedia Network Engineer, Politeknik Negeri Jakarta (semester 3), dengan ketertarikan lintas disiplin: <strong>network infrastructure, cybersecurity, multimedia, hingga finance, akuntansi, audit, dan business development</strong>.
-            </p>
-            <p>
-              Saya senang memecahkan masalah dan cepat beradaptasi di lingkungan baru — baik saat menangani konfigurasi teknis maupun menganalisis data dan keuangan. Rasa ingin tahu yang luas ini saya jadikan modal untuk terus berkembang di berbagai arah karir yang relevan.
-            </p>
-          </div>
-
-          <div class="about-stats">
-            <div class="stat-item">
-              <div class="stat-number">3.6+</div>
-              <div class="stat-label">IPK Semester 3 PNJ</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">6</div>
-              <div class="stat-label">Proyek Portfolio</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">2</div>
-              <div class="stat-label">Sertifikasi Resmi</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">89</div>
-              <div class="stat-label">Nilai Rata-rata TKJ</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience & Volunteer Section -->
-  <section class="timeline-section" id="experience">
-    <div class="container">
-      <div class="section-header scroll-animate fade-up">
-        <div class="section-tag">
-          <i class="ri-briefcase-4-line"></i>
-          <span>Pengalaman Kerja & Organisasi</span>
-        </div>
-        <h2 class="section-title">Riwayat Karir & Kontribusi Sosial</h2>
-        <p class="section-subtitle">Pengalaman profesional teknis, audit, layanan pelanggan, dan pengabdian masyarakat.</p>
-      </div>
-
-      <div class="timeline">
-        <!-- Item 1: Junior Auditor -->
-        <div class="timeline-item scroll-animate slide-left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <span class="timeline-date">KAP Wibisono dan Rekan (1 Bulan)</span>
-            <h3 class="timeline-title">Junior Auditor</h3>
-            <div class="timeline-subtitle">Finance & Accounting Audit</div>
-            <p class="timeline-desc">Terlibat dalam proses audit laporan keuangan klien perusahaan (PT), mencakup pemeriksaan dokumen, verifikasi transaksi, dan penyusunan kertas kerja audit guna memastikan kesesuaian laporan keuangan dengan standar akuntansi yang berlaku.</p>
-          </div>
-        </div>
-
-        <!-- Item 2: Customer Service -->
-        <div class="timeline-item scroll-animate slide-right">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <span class="timeline-date">Sept 2024 – Feb 2025</span>
-            <h3 class="timeline-title">Customer Service & IT Support</h3>
-            <div class="timeline-subtitle">Mentari Computer</div>
-            <p class="timeline-desc">Mengoperasikan & merawat mesin percetakan digital, melakukan konfigurasi & pemeliharaan jaringan lokal (LAN) antar perangkat, melayani pelanggan dalam duplikasi dokumen, pemindahan data, serta editing dokumen dan foto.</p>
-          </div>
-        </div>
-
-        <!-- Item 3: Teknisi Lapangan -->
-        <div class="timeline-item scroll-animate slide-left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <span class="timeline-date">Sept 2024 – Feb 2025</span>
-            <h3 class="timeline-title">Teknisi Lapangan Jaringan</h3>
-            <div class="timeline-subtitle">A-One Network</div>
-            <p class="timeline-desc">Melakukan instalasi, konfigurasi, dan pemeliharaan jaringan WiFi, router, dan perangkat pelanggan. Menangani penanganan gangguan koneksi, pengecekan kabel, serta optimasi sinyal jaringan.</p>
-          </div>
-        </div>
-
-        <!-- Item 4: P3GN Volunteer -->
-        <div class="timeline-item scroll-animate slide-right">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <span class="timeline-date">Kegiatan Sosial</span>
-            <h3 class="timeline-title">Anggota & Relawan Bakti Sosial</h3>
-            <div class="timeline-subtitle">P3GN (Paguyuban Pekerja Pertamina Gas Negara)</div>
-            <p class="timeline-desc">Berpartisipasi aktif dalam program bakti sosial gotong royong pembersihan dan perawatan rumah ibadah secara gratis di berbagai wilayah Indonesia.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education Section -->
-  <section class="timeline-section" id="education" style="background: var(--bg-primary);">
-    <div class="container">
-      <div class="section-header scroll-animate fade-up">
-        <div class="section-tag">
-          <i class="ri-graduation-cap-line"></i>
-          <span>Riwayat Pendidikan</span>
-        </div>
-        <h2 class="section-title">Latar Belakang Akademik</h2>
-      </div>
-
-      <div class="timeline">
-        <!-- Item 1: PNJ -->
-        <div class="timeline-item scroll-animate slide-left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <span class="timeline-date">2025 – Sekarang (Semester 3)</span>
-            <h3 class="timeline-title">D4 Multimedia Network Engineer</h3>
-            <div class="timeline-subtitle">Politeknik Negeri Jakarta</div>
-            <p class="timeline-desc">Indeks Prestasi (IP): <strong>3.6+</strong>. Mempelajari rekayasa jaringan multimedia, komunikasi data, keamanan siber, dan infrastruktur sistem.</p>
-          </div>
-        </div>
-
-        <!-- Item 2: SMKN 1 Kasreman -->
-        <div class="timeline-item scroll-animate slide-right">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <span class="timeline-date">Lulus 2025</span>
-            <h3 class="timeline-title">Teknik Komputer dan Jaringan (TKJ)</h3>
-            <div class="timeline-subtitle">SMKN 1 Kasreman</div>
-            <p class="timeline-desc">Nilai Rata-Rata Kelulusan: <strong>89</strong>. Berhasil menguasai dasar-dasar perakitan komputer, pengkabelan UTP/Fiber, dan administrasi server.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Showcase Section -->
-  <section class="projects-section" id="projects">
-    <div class="container">
-      <div class="section-header scroll-animate fade-up">
-        <div class="section-tag">
-          <i class="ri-folder-code-line"></i>
-          <span>Showcase Proyek</span>
-        </div>
-        <h2 class="section-title">Daftar Proyek Portofolio</h2>
-        <p class="section-subtitle">6 Proyek unggulan meliputi Networking, IoT, Audit Keuangan, Multimedia, dan Edukasi Sosial.</p>
-      </div>
-
-      <div class="projects-filter scroll-animate fade-up">
-        <button class="filter-btn active" data-filter="all">Semua Proyek (6)</button>
-        <button class="filter-btn" data-filter="net">Networking & IoT</button>
-        <button class="filter-btn" data-filter="audit">Finance & Audit</button>
-        <button class="filter-btn" data-filter="multi">Multimedia & Edukasi</button>
-      </div>
-
-      <div class="projects-grid">
-        <!-- Project Card 1: Networking -->
-        <div class="project-card-wrapper scroll-animate fade-up delay-1">
-          <div class="project-card tilt-card" data-id="1" data-category="net">
-            <div class="project-img-wrapper">
-              <img src="assets/images/project_net.jpg" alt="Simulasi Jaringan Cisco Mikrotik" class="project-img" loading="lazy" width="400" height="200">
-              <span class="project-badge">Networking</span>
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Konfigurasi & Simulasi Jaringan</h3>
-              <p class="project-desc">Merancang & mengkonfigurasi topologi jaringan skala kantor/area luas dengan Cisco Packet Tracer & Mikrotik (Routing, Switching, Subnetting).</p>
-              <div class="project-tags">
-                <span class="tag-item">Cisco Packet Tracer</span>
-                <span class="tag-item">Mikrotik</span>
-                <span class="tag-item">Subnetting</span>
-              </div>
-              <div class="project-footer">
-                <span style="font-size: 0.85rem; color: var(--text-secondary);">Praktikum Kuliah</span>
-                <span class="project-link-btn">Detail <i class="ri-arrow-right-line"></i></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project Card 2: Gas Detector IoT -->
-        <div class="project-card-wrapper scroll-animate fade-up delay-2">
-          <div class="project-card tilt-card" data-id="2" data-category="net">
-            <div class="project-img-wrapper">
-              <img src="assets/images/project_gas.jpg" alt="Gas Detector IoT" class="project-img" loading="lazy" width="400" height="200">
-              <span class="project-badge">IoT & Hardware</span>
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Gas Detector — IoT Dasar</h3>
-              <p class="project-desc">Membangun perangkat pendeteksi gas berbasis IoT, mencakup perakitan sensor MQ-2, pemrograman mikrokontroler Arduino, dan sistem deteksi.</p>
-              <div class="project-tags">
-                <span class="tag-item">Arduino</span>
-                <span class="tag-item">Sensor MQ-2</span>
-                <span class="tag-item">IoT</span>
-              </div>
-              <div class="project-footer">
-                <span style="font-size: 0.85rem; color: var(--text-secondary);">PBL Project</span>
-                <span class="project-link-btn">Detail <i class="ri-arrow-right-line"></i></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project Card 3: Edukasi Pancasila -->
-        <div class="project-card-wrapper scroll-animate fade-up delay-3">
-          <div class="project-card tilt-card" data-id="3" data-category="multi">
-            <div class="project-img-wrapper">
-              <img src="assets/images/project_net.jpg" alt="Edukasi Teknologi Pancasila" class="project-img" loading="lazy" width="400" height="200">
-              <span class="project-badge">Edukasi & Sosial</span>
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Edukasi Teknologi & Pancasila</h3>
-              <p class="project-desc">Merancang program edukasi pemanfaatan teknologi berbasis nilai Pancasila untuk siswa SMK di Jakarta guna meningkatkan nilai kebangsaan digital.</p>
-              <div class="project-tags">
-                <span class="tag-item">Workshop</span>
-                <span class="tag-item">Pancasila</span>
-                <span class="tag-item">SMK Jakarta</span>
-              </div>
-              <div class="project-footer">
-                <span style="font-size: 0.85rem; color: var(--text-secondary);">Proyek Edukasi</span>
-                <span class="project-link-btn">Detail <i class="ri-arrow-right-line"></i></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project Card 4: Produksi Video -->
-        <div class="project-card-wrapper scroll-animate fade-up delay-1">
-          <div class="project-card tilt-card" data-id="4" data-category="multi">
-            <div class="project-img-wrapper">
-              <img src="assets/images/project_gas.jpg" alt="Produksi Video Konten" class="project-img" loading="lazy" width="400" height="200">
-              <span class="project-badge">Multimedia</span>
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Produksi Video Konten Pribadi</h3>
-              <p class="project-desc">Memproduksi video hiburan secara independen, mulai dari perencanaan konsep, shooting, editing, color grading, hingga motion graphics.</p>
-              <div class="project-tags">
-                <span class="tag-item">CapCut</span>
-                <span class="tag-item">Alight Motion</span>
-                <span class="tag-item">Photoshop</span>
-              </div>
-              <div class="project-footer">
-                <span style="font-size: 0.85rem; color: var(--text-secondary);">Proyek Personal</span>
-                <span class="project-link-btn">Detail <i class="ri-arrow-right-line"></i></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project Card 5: Audit Laporan Keuangan -->
-        <div class="project-card-wrapper scroll-animate fade-up delay-2">
-          <div class="project-card tilt-card" data-id="5" data-category="audit">
-            <div class="project-img-wrapper">
-              <img src="assets/images/project_audit.jpg" alt="Audit Laporan Keuangan" class="project-img" loading="lazy" width="400" height="200">
-              <span class="project-badge">Finance & Audit</span>
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Audit Laporan Keuangan Klien</h3>
-              <p class="project-desc">Pemeriksaan dokumen transaksi, verifikasi laporan keuangan, dan penyusunan kertas kerja audit untuk klien PT di KAP Wibisono dan Rekan.</p>
-              <div class="project-tags">
-                <span class="tag-item">MS Excel</span>
-                <span class="tag-item">Financial Audit</span>
-                <span class="tag-item">Akuntansi</span>
-              </div>
-              <div class="project-footer">
-                <span style="font-size: 0.85rem; color: var(--text-secondary);">KAP Wibisono</span>
-                <span class="project-link-btn">Detail <i class="ri-arrow-right-line"></i></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project Card 6: Bakti Sosial P3GN -->
-        <div class="project-card-wrapper scroll-animate fade-up delay-3">
-          <div class="project-card tilt-card" data-id="6" data-category="multi">
-            <div class="project-img-wrapper">
-              <img src="assets/images/project_audit.jpg" alt="Bakti Sosial P3GN" class="project-img" loading="lazy" width="400" height="200">
-              <span class="project-badge">Kegiatan Sosial</span>
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Bakti Sosial Renovasi Rumah Ibadah</h3>
-              <p class="project-desc">Program pengabdian masyarakat gotong royong pembersihan & perawatan rumah ibadah gratis bersama Paguyuban Pekerja Pertamina Gas Negara.</p>
-              <div class="project-tags">
-                <span class="tag-item">P3GN</span>
-                <span class="tag-item">Relawan</span>
-                <span class="tag-item">Bakti Sosial</span>
-              </div>
-              <div class="project-footer">
-                <span style="font-size: 0.85rem; color: var(--text-secondary);">Volunteer P3GN</span>
-                <span class="project-link-btn">Detail <i class="ri-arrow-right-line"></i></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills Matrix Section -->
-  <section class="skills-section" id="skills">
-    <div class="container">
-      <div class="section-header scroll-animate fade-up">
-        <div class="section-tag">
-          <i class="ri-tools-line"></i>
-          <span>Matriks Keahlian</span>
-        </div>
-        <h2 class="section-title">Keahlian & Sertifikasi Resmi</h2>
-        <p class="section-subtitle">Kompetensi teknis jaringan, cybersecurity, multimedia, akuntansi, hingga soft skills.</p>
-      </div>
-
-      <div class="skills-grid">
-        <!-- 1. Networking -->
-        <div class="skill-category-card scroll-animate fade-up delay-1">
-          <div class="category-header">
-            <div class="category-icon"><i class="ri-router-line"></i></div>
-            <h3 class="category-title">1. Networking & Infrastructure</h3>
-          </div>
-          <div class="skill-badges">
-            <span class="skill-badge"><i class="ri-server-line"></i> Cisco (Packet Tracer)</span>
-            <span class="skill-badge"><i class="ri-wifi-line"></i> Mikrotik / RouterOS</span>
-            <span class="skill-badge"><i class="ri-global-line"></i> Subnetting & IP Addressing</span>
-            <span class="skill-badge"><i class="ri-node-tree"></i> Routing & Switching dasar</span>
-            <span class="skill-badge"><i class="ri-links-line"></i> TCP/IP, DNS, DHCP</span>
-            <span class="skill-badge"><i class="ri-tools-fill"></i> Network Troubleshooting</span>
-          </div>
-        </div>
-
-        <!-- 2. Cybersecurity -->
-        <div class="skill-category-card scroll-animate fade-up delay-2">
-          <div class="category-header">
-            <div class="category-icon"><i class="ri-shield-keyhole-line"></i></div>
-            <h3 class="category-title">2. Cybersecurity</h3>
-          </div>
-          <div class="skill-badges">
-            <span class="skill-badge"><i class="ri-lock-line"></i> Firewall & VPN Basics</span>
-            <span class="skill-badge"><i class="ri-terminal-window-line"></i> Penetration Testing Basics</span>
-            <span class="skill-badge"><i class="ri-shield-check-line"></i> Cyber Security Best Practice</span>
-          </div>
-        </div>
-
-        <!-- 3. Multimedia -->
-        <div class="skill-category-card scroll-animate fade-up delay-3">
-          <div class="category-header">
-            <div class="category-icon"><i class="ri-image-edit-line"></i></div>
-            <h3 class="category-title">3. Multimedia & Graphic</h3>
-          </div>
-          <div class="skill-badges">
-            <span class="skill-badge"><i class="ri-palette-line"></i> Canva</span>
-            <span class="skill-badge"><i class="ri-quill-pen-line"></i> Adobe Photoshop</span>
-            <span class="skill-badge"><i class="ri-vector-line"></i> CorelDRAW & Affinity</span>
-            <span class="skill-badge"><i class="ri-video-download-line"></i> CapCut & Alight Motion</span>
-          </div>
-        </div>
-
-        <!-- 4. Finance & Audit -->
-        <div class="skill-category-card scroll-animate fade-up delay-1">
-          <div class="category-header">
-            <div class="category-icon"><i class="ri-money-dollar-circle-line"></i></div>
-            <h3 class="category-title">4. Finance & Audit</h3>
-          </div>
-          <div class="skill-badges">
-            <span class="skill-badge"><i class="ri-book-read-line"></i> Dasar-Dasar Akuntansi</span>
-            <span class="skill-badge"><i class="ri-file-search-line"></i> Prinsip Audit Keuangan</span>
-            <span class="skill-badge"><i class="ri-file-excel-line"></i> MS Excel Data & Spreadsheet</span>
-            <span class="skill-badge"><i class="ri-file-chart-line"></i> Pemahaman Laporan Keuangan</span>
-          </div>
-        </div>
-
-        <!-- 5. Tools & Software -->
-        <div class="skill-category-card scroll-animate fade-up delay-2">
-          <div class="category-header">
-            <div class="category-icon"><i class="ri-computer-line"></i></div>
-            <h3 class="category-title">5. Tools & Software</h3>
-          </div>
-          <div class="skill-badges">
-            <span class="skill-badge"><i class="ri-microsoft-line"></i> MS Office (Word, Excel, PPT)</span>
-            <span class="skill-badge"><i class="ri-windows-fill"></i> Windows & Linux (Dasar)</span>
-            <span class="skill-badge"><i class="ri-google-fill"></i> Google Workspace</span>
-          </div>
-        </div>
-
-        <!-- 6 & 7. Soft Skills & Certification -->
-        <div class="skill-category-card scroll-animate fade-up delay-3">
-          <div class="category-header">
-            <div class="category-icon"><i class="ri-award-line"></i></div>
-            <h3 class="category-title">6. Soft Skills & Sertifikasi</h3>
-          </div>
-          <div class="skill-badges">
-            <span class="skill-badge" style="border-color: #34c759; color: #34c759; font-weight: 700;"><i class="ri-verified-badge-fill"></i> CCNA (Cisco Certified)</span>
-            <span class="skill-badge" style="border-color: var(--accent-primary); color: var(--accent-primary); font-weight: 700;"><i class="ri-verified-badge-fill"></i> Sertifikasi Mikrotik BNSP</span>
-            <span class="skill-badge"><i class="ri-lightbulb-line"></i> Problem Solving</span>
-            <span class="skill-badge"><i class="ri-flashlight-line"></i> Fast Learner</span>
-            <span class="skill-badge"><i class="ri-team-line"></i> Kolaborasi & Tim</span>
-            <span class="skill-badge"><i class="ri-time-line"></i> Manajemen Waktu</span>
-            <span class="skill-badge"><i class="ri-chat-1-line"></i> Komunikasi</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="contact-section" id="contact">
-    <div class="container">
-      <div class="contact-card scroll-animate scale-up">
-        <div class="contact-grid">
-          <div class="contact-info">
-            <div class="section-tag">
-              <i class="ri-contacts-line"></i>
-              <span>Informasi Kontak</span>
-            </div>
-            <h2 class="contact-info-title">Hubungi Narangga</h2>
-            <p class="contact-info-desc">
-              Silakan kirimkan pesan, tawaran kolaborasi, atau diskusi proyek melalui formulir ini atau langsung melalui media sosial & nomor kontak resmi saya.
-            </p>
-
-            <div class="contact-methods">
-              <a href="https://wa.me/6282337840357" target="_blank" rel="noopener noreferrer" class="contact-method-item">
-                <div class="contact-icon"><i class="ri-whatsapp-line"></i></div>
-                <div>
-                  <div class="contact-detail-title">Telepon / WhatsApp</div>
-                  <div class="contact-detail-value">082337840357</div>
-                </div>
-              </a>
-
-              <a href="mailto:naranggaadennass@gmail.com" class="contact-method-item">
-                <div class="contact-icon"><i class="ri-mail-line"></i></div>
-                <div>
-                  <div class="contact-detail-title">Email</div>
-                  <div class="contact-detail-value">naranggaadennass@gmail.com</div>
-                </div>
-              </a>
-
-              <a href="https://www.linkedin.com/in/narangga-adennas-s-587442333/" target="_blank" rel="noopener noreferrer" class="contact-method-item">
-                <div class="contact-icon"><i class="ri-linkedin-fill"></i></div>
-                <div>
-                  <div class="contact-detail-title">LinkedIn</div>
-                  <div class="contact-detail-value">Narangga Adennas Shaputra</div>
-                </div>
-              </a>
-
-              <a href="https://github.com/N4z-Dev/Web-Portofolio" target="_blank" rel="noopener noreferrer" class="contact-method-item">
-                <div class="contact-icon"><i class="ri-github-fill"></i></div>
-                <div>
-                  <div class="contact-detail-title">GitHub Repository</div>
-                  <div class="contact-detail-value">N4z-Dev/Web-Portofolio</div>
-                </div>
-              </a>
-
-              <a href="https://instagram.com/ranggaa144p" target="_blank" rel="noopener noreferrer" class="contact-method-item">
-                <div class="contact-icon"><i class="ri-instagram-line"></i></div>
-                <div>
-                  <div class="contact-detail-title">Instagram</div>
-                  <div class="contact-detail-value">@ranggaa144p</div>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <div class="contact-form-container">
-            <form id="contact-form">
-              <div class="form-group">
-                <label for="name" class="form-label">Nama Lengkap</label>
-                <input type="text" id="name" class="form-input" placeholder="Masukkan nama Anda" required>
-              </div>
-
-              <div class="form-group">
-                <label for="email" class="form-label">Alamat Email</label>
-                <input type="email" id="email" class="form-input" placeholder="nama@email.com" required>
-              </div>
-
-              <div class="form-group">
-                <label for="message" class="form-label">Pesan / Diskusi Proyek</label>
-                <textarea id="message" class="form-textarea" placeholder="Tuliskan pesan Anda..." required></textarea>
-              </div>
-
-              <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
-                <span>Kirim Pesan Langsung</span>
-                <i class="ri-send-plane-fill"></i>
-              </button>
-
-              <div id="form-status" style="display: none; margin-top: 16px; padding: 12px; border-radius: var(--radius-sm); background: rgba(52, 199, 89, 0.15); border: 1px solid #34c759; color: #34c759; font-size: 0.9rem; text-align: center;"></div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Project Detail Popup Modal -->
-  <div class="modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-box">
-      <button class="modal-close-btn" id="modal-close" aria-label="Tutup Popup Detail Proyek"><i class="ri-close-line"></i></button>
-      <div class="modal-body">
-        <img src="assets/images/project_net.jpg" alt="Detail Proyek" class="modal-img" id="modal-img" width="600" height="260">
-        <span class="section-tag" id="modal-category">Networking</span>
-        <h2 style="font-size: 1.8rem; margin: 12px 0;" id="modal-title">Nama Proyek</h2>
-        <p style="color: var(--text-secondary); margin-bottom: 20px;" id="modal-desc">Deskripsi proyek...</p>
-        
-        <h4 style="margin-bottom: 10px;">Teknologi & Tools Yang Digunakan:</h4>
-        <div class="project-tags" id="modal-tech" style="margin-bottom: 28px;"></div>
+      <div class="col-lg-8 col-md-7 text-center text-md-start">
+        <h2 class="h1 mt-2" data-aos="fade-left" data-aos-delay="0">Joyce Harrison</h2>
+        <p data-aos="fade-left" data-aos-delay="100">Graphic Designer & Web Developer</p>
+        <div class="d-print-none" data-aos="fade-left" data-aos-delay="200"><a class="btn btn-light text-dark shadow-sm mt-1 me-1" href="right-resume.pdf" target="_blank">Download CV</a><a class="btn btn-success shadow-sm mt-1" href="#contact">Hire Me</a></div>
       </div>
     </div>
   </div>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2026 Narangga Adennas Shaputra. All Rights Reserved.</p>
-      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">D4 Multimedia Network Engineer — Politeknik Negeri Jakarta</p>
-      <a href="#hero" class="back-to-top" aria-label="Kembali ke atas beranda">
-        <span>Kembali Ke Atas</span>
-        <i class="ri-arrow-up-line"></i>
-      </a>
+  <div class="about-section pt-4 px-3 px-lg-4 mt-1">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="h3 mb-3">About Me</h2>
+        <p>Hello! I’m Joyce Harrison. I am passionate about UI/UX design and Web Design. I am a skilled Front-end Developer and master of Graphic Design tools such as Photoshop and Sketch.</p>
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <div class="row mt-2">
+          <div class="col-sm-4">
+            <div class="pb-1">Age</div>
+          </div>
+          <div class="col-sm-8">
+            <div class="pb-1 text-secondary">28</div>
+          </div>
+          <div class="col-sm-4">
+            <div class="pb-1">Email</div>
+          </div>
+          <div class="col-sm-8">
+            <div class="pb-1 text-secondary">Joyce@company.com</div>
+          </div>
+          <div class="col-sm-4">
+            <div class="pb-1">Phone</div>
+          </div>
+          <div class="col-sm-8">
+            <div class="pb-1 text-secondary">+0718-111-0011</div>
+          </div>
+          <div class="col-sm-4">
+            <div class="pb-1">Address</div>
+          </div>
+          <div class="col-sm-8">
+            <div class="pb-1 text-secondary">140, City Center, New York, U.S.A</div>
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
-
-  <!-- Main JavaScript File -->
-  <script src="js/main.js"></script>
-</body>
+  </div>
+  <hr class="d-print-none"/>
+  <div class="skills-section px-3 px-lg-4">
+    <h2 class="h3 mb-3">Professional Skills</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-2"><span>HTML</span>
+          <div class="progress my-1">
+            <div class="progress-bar bg-primary" role="progressbar" data-aos="zoom-in-right" data-aos-delay="100" data-aos-anchor=".skills-section" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="mb-2"><span>CSS</span>
+          <div class="progress my-1">
+            <div class="progress-bar bg-primary" role="progressbar" data-aos="zoom-in-right" data-aos-delay="200" data-aos-anchor=".skills-section" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="mb-2"><span>JavaScript</span>
+          <div class="progress my-1">
+            <div class="progress-bar bg-primary" role="progressbar" data-aos="zoom-in-right" data-aos-delay="300" data-aos-anchor=".skills-section" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-2"><span>Adobe Photoshop</span>
+          <div class="progress my-1">
+            <div class="progress-bar bg-success" role="progressbar" data-aos="zoom-in-right" data-aos-delay="400" data-aos-anchor=".skills-section" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="mb-2"><span>Sketch</span>
+          <div class="progress my-1">
+            <div class="progress-bar bg-success" role="progressbar" data-aos="zoom-in-right" data-aos-delay="500" data-aos-anchor=".skills-section" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="mb-2"><span>Adobe XD</span>
+          <div class="progress my-1">
+            <div class="progress-bar bg-success" role="progressbar" data-aos="zoom-in-right" data-aos-delay="600" data-aos-anchor=".skills-section" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="d-print-none"/>
+  <div class="work-experience-section px-3 px-lg-4">
+    <h2 class="h3 mb-4">Work Experience</h2>
+    <div class="timeline">
+      <div class="timeline-card timeline-card-primary card shadow-sm">
+        <div class="card-body">
+          <div class="h5 mb-1">Frontend Developer <span class="text-muted h6">at Creative Agency</span></div>
+          <div class="text-muted text-small mb-2">May, 2015 - Present</div>
+          <div>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.</div>
+        </div>
+      </div>
+      <div class="timeline-card timeline-card-primary card shadow-sm">
+        <div class="card-body">
+          <div class="h5 mb-1">Graphic Designer <span class="text-muted h6">at Design Studio</span></div>
+          <div class="text-muted text-small mb-2">June, 2013 - May, 2015</div>
+          <div>Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</div>
+        </div>
+      </div>
+      <div class="timeline-card timeline-card-primary card shadow-sm">
+        <div class="card-body">
+          <div class="h5 mb-1">Junior Web Developer <span class="text-muted h6">at Indie Studio</span></div>
+          <div class="text-muted text-small mb-2">Jan, 2011 - May, 2013</div>
+          <div>User generated content in real-time will have multiple touchpoints for offshoring. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="d-print-none"/>
+  <div class="page-break"></div>
+  <div class="education-section px-3 px-lg-4 pb-4">
+    <h2 class="h3 mb-4">Education</h2>
+    <div class="timeline">
+      <div class="timeline-card timeline-card-success card shadow-sm">
+        <div class="card-body">
+          <div class="h5 mb-1">Masters in Information Technology <span class="text-muted h6">from International University</span></div>
+          <div class="text-muted text-small mb-2">2011 - 2013</div>
+          <div>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.</div>
+        </div>
+      </div>
+      <div class="timeline-card timeline-card-success card shadow-sm">
+        <div class="card-body">
+          <div class="h5 mb-1">Bachelor of Computer Science <span class="text-muted h6">from Regional College</span></div>
+          <div class="text-muted text-small mb-2">2007 - 2011</div>
+          <div>Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</div>
+        </div>
+      </div>
+      <div class="timeline-card timeline-card-success card shadow-sm">
+        <div class="card-body">
+          <div class="h5 mb-1">Science and Mathematics <span class="text-muted h6">from Mt. High Scool</span></div>
+          <div class="text-muted text-small mb-2">1995 - 2007</div>
+          <div>User generated content in real-time will have multiple touchpoints for offshoring. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="d-print-none"/>
+  <div class="contant-section px-3 px-lg-4 pb-4" id="contact">
+    <h2 class="h3 text mb-3">Contact</h2>
+    <div class="row">
+      <div class="col-md-7 d-print-none">
+        <div class="my-2"><form action="https://formspree.io/your@email.com"
+    method="POST">
+  <div class="row">
+    <div class="col-6">
+      <input class="form-control" type="text" id="name" name="name" placeholder="Your Name" required>
+    </div>
+    <div class="col-6">
+      <input class="form-control" type="email" id="email" name="_replyto" placeholder="Your E-mail" required>
+    </div>
+  </div>
+  <div class="form-group my-2">
+    <textarea class="form-control" style="resize: none;" id="message" name="message" rows="4"  placeholder="Your Message" required></textarea>
+  </div>
+  <button class="btn btn-primary mt-2" type="submit">Send</button>
+</form>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mt-2">
+          <h3 class="h6">Address</h3>
+          <div class="pb-2 text-secondary">140, City Center, New York, U.S.A</div>
+          <h3 class="h6">Phone</h3>
+          <div class="pb-2 text-secondary">+0718-111-0011</div>
+          <h3 class="h6">Email</h3>
+          <div class="pb-2 text-secondary">Joyce@company.com</div>
+        </div>
+      </div>
+      <div class="col d-none d-print-block">
+        <div class="mt-2">
+          <div>
+            <div class="mb-2">
+              <div class="text-dark"><i class="fab fa-twitter mr-1"></i><span>https://twitter.com/templateflip</span>
+              </div>
+            </div>
+            <div class="mb-2">
+              <div class="text-dark"><i class="fab fa-facebook mr-1"></i><span>https://www.facebook.com/templateflip</span>
+              </div>
+            </div>
+            <div class="mb-2">
+              <div class="text-dark"><i class="fab fa-instagram mr-1"></i><span>https://www.instagram.com/templateflip</span>
+              </div>
+            </div>
+            <div class="mb-2">
+              <div class="text-dark"><i class="fab fa-github mr-1"></i><span>https://github.com/templateflip</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+    </div>
+    <footer class="pt-4 pb-4 text-muted text-center d-print-none">
+      <div class="container">
+        <div class="my-3">
+          <div class="h4">Joyce Harrison</div>
+          <div class="footer-nav">
+            <nav role="navigation">
+              <ul class="nav justify-content-center">
+                <li class="nav-item"><a class="nav-link" href="https://twitter.com/templateflip" title="Twitter"><i class="fab fa-twitter"></i><span class="menu-title sr-only">Twitter</span></a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="https://www.facebook.com/templateflip" title="Facebook"><i class="fab fa-facebook"></i><span class="menu-title sr-only">Facebook</span></a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="https://www.instagram.com/templateflip" title="Instagram"><i class="fab fa-instagram"></i><span class="menu-title sr-only">Instagram</span></a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/templateflip" title="Github"><i class="fab fa-github"></i><span class="menu-title sr-only">Github</span></a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="text-small">
+          <div class="mb-1">&copy; Right Resume. All rights reserved.</div>
+          <div>Design - <a href="https://templateflip.com/" target="_blank">TemplateFlip</a></div>
+        </div>
+      </div>
+    </footer>
+    <script src="scripts/bootstrap.bundle.min.js?ver=1.2.0"></script>
+    <script src="scripts/aos.js?ver=1.2.0"></script>
+    <script src="scripts/main.js?ver=1.2.0"></script>
+  </body>
 </html>
