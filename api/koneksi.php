@@ -1,60 +1,32 @@
 <?php
 // ===================================================================
-// FILE: api/koneksi.php (Cloud & Serverless Database Handler)
-// FUNGSI: Menghubungkan ke MySQL (jika tersedia host) atau otomatis
-//         menggunakan SQLite di /tmp/ agar 100% berjalan online di Vercel.
+// FILE: api/koneksi.php (Cloud MySQL TiDB Connection for Vercel)
 // ===================================================================
 
-$db_host = getenv('DB_HOST') ?: null;
-$db_user = getenv('DB_USER') ?: 'root';
-$db_pass = getenv('DB_PASS') ?: '';
-$db_name = getenv('DB_NAME') ?: 'db_kampus';
-$db_port = getenv('DB_PORT') ?: 3306;
+$db_host = getenv('DB_HOST') ?: "gateway01.ap-southeast-1.prod.aws.tidbcloud.com";
+$db_port = intval(getenv('DB_PORT') ?: 4000);
+$db_user = getenv('DB_USER') ?: "2L76wuLfHFgniLG.root";
+$db_pass = getenv('DB_PASS') ?: "LlsMsy8xpeQSlRyh";
+$db_name = getenv('DB_NAME') ?: "db_kampus";
 
 $db = null;
-$driver = 'sqlite';
+$driver = 'TiDB Cloud MySQL';
 
-if (!empty($db_host)) {
-    try {
-        $dsn = "mysql:host=$db_host;port=$db_port;dbname=$db_name;charset=utf8mb4";
-        $db = new PDO($dsn, $db_user, $db_pass, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        ]);
-        $driver = 'mysql';
-    } catch (Exception $e) {
-        $db = null;
-    }
-}
-
-if (!$db) {
-    // Jalur Cloud Serverless Vercel: Gunakan SQLite di folder writable /tmp
-    $sqlite_dir = sys_get_temp_dir();
-    $sqlite_file = $sqlite_dir . DIRECTORY_SEPARATOR . 'db_kampus.sqlite';
-    
+try {
+    // Koneksi PDO MySQL dengan SSL ke TiDB Cloud
+    $dsn = "mysql:host=$db_host;port=$db_port;dbname=$db_name;charset=utf8mb4";
+    $options = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::MYSQL_ATTR_SSL_CA => true
+    ];
+    $db = new PDO($dsn, $db_user, $db_pass, $options);
+} catch (Exception $e) {
+    // Fallback SQLite jika terjadi kendala jaringan
+    $sqlite_file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'db_kampus.sqlite';
     $db = new PDO("sqlite:" . $sqlite_file);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    $driver = 'sqlite';
-
-    // Inisialisasi tabel jika belum ada
-    $db->exec("CREATE TABLE IF NOT EXISTS mahasiswa (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nim TEXT NOT NULL UNIQUE,
-        nama TEXT NOT NULL,
-        jurusan TEXT NOT NULL,
-        alamat TEXT NOT NULL,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )");
-
-    // Cek apakah data sampel sudah ada
-    $count = $db->query("SELECT COUNT(*) FROM mahasiswa")->fetchColumn();
-    if ($count == 0) {
-        $stmt = $db->prepare("INSERT INTO mahasiswa (nim, nama, jurusan, alamat) VALUES (?, ?, ?, ?)");
-        $stmt->execute(['2507421029', 'Narangga Aden', 'Teknik Informatika', 'Depok, Jawa Barat']);
-        $stmt->execute(['2507421001', 'Ahmad Pratama', 'Sistem Informasi', 'Jakarta Selatan, DKI Jakarta']);
-        $stmt->execute(['2507421015', 'Siti Rahmawati', 'Teknik Komputer', 'Bandung, Jawa Barat']);
-        $stmt->execute(['2507421033', 'Budi Santoso', 'Teknik Informatika', 'Bogor, Jawa Barat']);
-    }
+    $driver = 'SQLite (Serverless Fallback)';
 }
 ?>
