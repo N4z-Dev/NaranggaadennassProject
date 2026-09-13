@@ -1,19 +1,7 @@
 <?php
-// ===================================================================
-// TUGAS PRAKTIKUM PEMROGRAMAN WEB: CRUD PHP & MYSQL
-// Implementasi 1: Multi-Page CRUD (Referensi: CodePolitan)
-// Mahasiswa : Narangga Adennas Shaputra
-// NIM       : 2507421029
-// Kelas     : TMJ 3A
-// Dosen     : Pak Chandra
-// ===================================================================
-
 require_once __DIR__ . '/koneksi.php';
 
-// Ambil notifikasi dari URL jika ada
 $pesan = $_GET['pesan'] ?? '';
-
-// Query untuk mengambil seluruh data mahasiswa
 $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
 ?>
 <!DOCTYPE html>
@@ -21,7 +9,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD PHP &amp; MySQL - Multi-Page (CodePolitan)</title>
+    <title>Data Mahasiswa</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -33,15 +21,8 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
             padding: 0 15px;
         }
         h2 {
-            margin-bottom: 5px;
-            color: #222;
-        }
-        .student-info {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 10px 15px;
             margin-bottom: 15px;
-            font-size: 13px;
+            color: #222;
         }
         .nav-mode {
             background-color: #f0f4f8;
@@ -51,7 +32,6 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
         }
         .nav-mode a {
             color: #0056b3;
-            font-weight: bold;
             text-decoration: none;
         }
         .nav-mode a:hover {
@@ -107,27 +87,12 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
 </head>
 <body>
 
-    <h2>Tugas Praktikum Pemrograman Web</h2>
-    
-    <div class="student-info">
-        <strong>Identitas Mahasiswa:</strong><br>
-        Nama : <strong>Narangga Adennas Shaputra</strong><br>
-        NIM : <strong>2507421029</strong><br>
-        Kelas : <strong>TMJ 3A</strong> (Teknik Multimedia dan Jaringan)<br>
-        Mata Kuliah : <strong>Pemrograman Web</strong><br>
-        Dosen Pengampu : <strong>Pak Chandra</strong>
-    </div>
-
-    <!-- Navigasi Pilihan Versi Tugas Sesuai Arahan Dosen -->
     <div class="nav-mode">
-        <strong>Pilihan Versi Tugas:</strong>
-        &nbsp;&nbsp;
-        <strong>[1] Versi Multi-Page (Referensi: CodePolitan)</strong>
+        <strong>Multi-Page</strong>
         &nbsp;|&nbsp;
-        <a href="single-page.php">[2] Versi Single-Page (Referensi: PetaniKode)</a>
+        <a href="single-page.php">Single-Page</a>
     </div>
 
-    <!-- Notifikasi Operasi CRUD -->
     <?php if ($pesan == 'sukses_tambah'): ?>
         <div class="pesan-sukses">Data mahasiswa berhasil ditambahkan!</div>
     <?php elseif ($pesan == 'sukses_edit'): ?>
@@ -135,10 +100,10 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
     <?php elseif ($pesan == 'sukses_hapus'): ?>
         <div class="pesan-sukses">Data mahasiswa berhasil dihapus!</div>
     <?php elseif ($pesan == 'gagal'): ?>
-        <div class="pesan-error">Terjadi kesalahan pada query database.</div>
+        <div class="pesan-error">Terjadi kesalahan pada database.</div>
     <?php endif; ?>
 
-    <h3>Daftar Mahasiswa (Versi Multi-Page - CodePolitan)</h3>
+    <h2>Data Mahasiswa</h2>
 
     <p>
         <a href="tambah.php" class="btn-tambah">[+] Tambah Mahasiswa Baru</a>
@@ -163,7 +128,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
             ?>
                 <tr>
                     <td style="text-align: center;"><?php echo $no++; ?></td>
-                    <td><strong><?php echo htmlspecialchars($row['nim']); ?></strong></td>
+                    <td><?php echo htmlspecialchars($row['nim']); ?></td>
                     <td><?php echo htmlspecialchars($row['nama']); ?></td>
                     <td><?php echo htmlspecialchars($row['jurusan']); ?></td>
                     <td><?php echo htmlspecialchars($row['alamat']); ?></td>
@@ -171,7 +136,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
                         <a href="edit.php?id=<?php echo $row['id']; ?>">Edit</a>
                         &nbsp;|&nbsp;
                         <a href="hapus.php?id=<?php echo $row['id']; ?>" 
-                           onclick="return confirm('Apakah Anda yakin ingin menghapus data <?php echo htmlspecialchars($row['nama']); ?>?');">
+                           onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                             Hapus
                         </a>
                     </td>
@@ -182,7 +147,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
             ?>
                 <tr>
                     <td colspan="6" style="text-align: center; color: #777; padding: 20px;">
-                        Belum ada data mahasiswa dalam database.
+                        Belum ada data mahasiswa.
                     </td>
                 </tr>
             <?php endif; ?>

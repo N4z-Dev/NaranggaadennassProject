@@ -1,63 +1,52 @@
-<?php
-// =======================================================
-// FILE: tambah.php (Multi-Page CRUD)
-// FUNGSI: Form HTML untuk menginputkan data mahasiswa baru
-// REFERENSI: CodePolitan - Multi-page PHP & MySQL CRUD
-// =======================================================
-?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Mahasiswa - CRUD Multi-Page</title>
+    <title>Tambah Mahasiswa</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container" style="max-width: 600px;">
-    <header>
-        <h1>Form Tambah Mahasiswa Baru</h1>
-        <p>Silakan isi seluruh input form di bawah ini. Semua field wajib diisi.</p>
-    </header>
+<div class="container">
+    <h2>Tambah Data Mahasiswa</h2>
+    <p><a href="index.php">&laquo; Kembali</a></p>
 
-    <!-- 
-      ALUR FORM KE POST:
-      - method="POST": Mengirimkan data secara tersembunyi via body HTTP Request (tidak di URL).
-      - action="proses_tambah.php": File target backend pemroses request.
-      - Atribut name: Kunci asosiatif yang akan diterima di $_POST['nama_input'].
-    -->
     <form action="proses_tambah.php" method="POST">
-        <div class="form-group">
-            <label for="nim">Nomor Induk Mahasiswa (NIM):</label>
-            <input type="text" id="nim" name="nim" placeholder="Contoh: 2507421029" required autocomplete="off">
-        </div>
-
-        <div class="form-group">
-            <label for="nama">Nama Lengkap:</label>
-            <input type="text" id="nama" name="nama" placeholder="Masukkan nama mahasiswa" required autocomplete="off">
-        </div>
-
-        <div class="form-group">
-            <label for="jurusan">Program Studi / Jurusan:</label>
-            <select id="jurusan" name="jurusan" required>
-                <option value="">-- Pilih Jurusan --</option>
-                <option value="Teknik Informatika">Teknik Informatika</option>
-                <option value="Sistem Informasi">Sistem Informasi</option>
-                <option value="Teknik Komputer">Teknik Komputer</option>
-                <option value="Teknologi Multimedia">Teknologi Multimedia</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="alamat">Alamat Lengkap:</label>
-            <textarea id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat domisili" required></textarea>
-        </div>
-
-        <div class="form-actions">
-            <button type="submit" name="btn_simpan" class="btn btn-primary">Simpan Data</button>
-            <a href="index.php" class="btn btn-secondary">Batal & Kembali</a>
-        </div>
+        <table border="0">
+            <tr>
+                <td width="150">NIM</td>
+                <td>: <input type="text" name="nim" size="30" required></td>
+            </tr>
+            <tr>
+                <td>Nama Lengkap</td>
+                <td>: <input type="text" name="nama" size="40" required></td>
+            </tr>
+            <tr>
+                <td>Jurusan</td>
+                <td>: 
+                    <select name="jurusan" required>
+                        <option value="">-- Pilih Jurusan --</option>
+                        <option value="Teknik Informatika">Teknik Informatika</option>
+                        <option value="Sistem Informasi">Sistem Informasi</option>
+                        <option value="Teknik Komputer">Teknik Komputer</option>
+                        <option value="Teknologi Multimedia">Teknologi Multimedia</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">Alamat</td>
+                <td>: <textarea name="alamat" rows="3" cols="40" required></textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" name="btn_simpan" value="Simpan">
+                    &nbsp;
+                    <input type="reset" value="Reset">
+                </td>
+            </tr>
+        </table>
     </form>
 </div>
 

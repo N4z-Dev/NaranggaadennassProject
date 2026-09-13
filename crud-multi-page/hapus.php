@@ -1,20 +1,10 @@
 <?php
-// =======================================================
-// FILE: hapus.php (Multi-Page CRUD)
-// FUNGSI: Menghapus baris record mahasiswa berdasarkan ID (DELETE)
-// =======================================================
-
 require_once 'koneksi.php';
 
-// Pastikan parameter ID ada di URL
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-    
-    $id = intval($_GET['id']);
+$id = intval($_GET['id'] ?? 0);
 
-    // Menyusun query DELETE dengan klausa WHERE id
+if ($id > 0) {
     $query = "DELETE FROM mahasiswa WHERE id = $id";
-
-    // Eksekusi query ke database
     $eksekusi = mysqli_query($koneksi, $query);
 
     if ($eksekusi) {
@@ -24,7 +14,6 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         header("Location: index.php?pesan=gagal_db");
         exit();
     }
-
 } else {
     header("Location: index.php");
     exit();

@@ -1,16 +1,8 @@
 <?php
-// ===================================================================
-// FILE: edit.php (Multi-Page CRUD - Form Edit)
-// REFERENSI: CodePolitan - Edit Data PHP & MySQL
-// Mahasiswa : Narangga Adennas Shaputra (2507421029) - TMJ 3A
-// Dosen     : Pak Chandra
-// ===================================================================
-
 require_once __DIR__ . '/koneksi.php';
 
 $error = '';
 
-// Proses update saat tombol Update diklik
 if (isset($_POST['Update'])) {
     $id      = intval($_POST['id'] ?? 0);
     $nim     = trim($_POST['nim'] ?? '');
@@ -19,7 +11,7 @@ if (isset($_POST['Update'])) {
     $alamat  = trim($_POST['alamat'] ?? '');
 
     if (empty($id) || empty($nim) || empty($nama) || empty($jurusan) || empty($alamat)) {
-        $error = "Semua data wajib diisi, tidak boleh kosong!";
+        $error = "Semua data wajib diisi!";
     } else {
         $nim_safe     = mysqli_real_escape_string($koneksi, $nim);
         $nama_safe    = mysqli_real_escape_string($koneksi, $nama);
@@ -42,13 +34,12 @@ if (isset($_POST['Update'])) {
     }
 }
 
-// Ambil data mahasiswa yang ingin diedit
 $id = intval($_GET['id'] ?? 0);
 $res = mysqli_query($koneksi, "SELECT * FROM mahasiswa WHERE id = $id LIMIT 1");
 $data = mysqli_fetch_assoc($res);
 
 if (!$data) {
-    die("Data mahasiswa tidak ditemukan! <a href='index.php'>Kembali</a>");
+    die("Data tidak ditemukan! <a href='index.php'>Kembali</a>");
 }
 ?>
 <!DOCTYPE html>
@@ -56,7 +47,7 @@ if (!$data) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Mahasiswa - CRUD Multi-Page</title>
+    <title>Edit Mahasiswa</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -67,14 +58,7 @@ if (!$data) {
             margin: 25px auto;
             padding: 0 15px;
         }
-        h2 { margin-bottom: 5px; color: #222; }
-        .student-info {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            font-size: 13px;
-        }
+        h2 { margin-bottom: 15px; color: #222; }
         .pesan-error {
             background-color: #f8d7da;
             border: 1px solid #f5c6cb;
@@ -115,21 +99,14 @@ if (!$data) {
 </head>
 <body>
 
-    <h2>Tugas Praktikum Pemrograman Web</h2>
-    <div class="student-info">
-        Nama: <strong>Narangga Adennas Shaputra</strong> &bull; NIM: <strong>2507421029</strong> &bull; Kelas: <strong>TMJ 3A</strong> &bull; Dosen: <strong>Pak Chandra</strong>
-    </div>
-
-    <p><a href="index.php">&laquo; Kembali ke Daftar Mahasiswa</a></p>
-
-    <h3>Form Edit Data Mahasiswa (Multi-Page)</h3>
+    <h2>Edit Data Mahasiswa</h2>
+    <p><a href="index.php">&laquo; Kembali</a></p>
 
     <?php if (!empty($error)): ?>
         <div class="pesan-error"><?php echo $error; ?></div>
     <?php endif; ?>
 
     <form action="edit.php" method="POST">
-        <!-- Input ID tersembunyi untuk referensi query UPDATE -->
         <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
 
         <table border="0">
@@ -142,7 +119,7 @@ if (!$data) {
                 <td>: <input type="text" name="nama" value="<?php echo htmlspecialchars($data['nama']); ?>" size="40" required></td>
             </tr>
             <tr>
-                <td>Program Studi / Jurusan</td>
+                <td>Jurusan</td>
                 <td>: 
                     <select name="jurusan" required>
                         <option value="Teknik Informatika" <?php echo ($data['jurusan'] == 'Teknik Informatika') ? 'selected' : ''; ?>>Teknik Informatika</option>

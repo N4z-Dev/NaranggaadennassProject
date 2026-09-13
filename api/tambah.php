@@ -1,25 +1,16 @@
 <?php
-// ===================================================================
-// FILE: tambah.php (Multi-Page CRUD - Form Tambah)
-// REFERENSI: CodePolitan - Tambah Data PHP & MySQL
-// Mahasiswa : Narangga Adennas Shaputra (2507421029) - TMJ 3A
-// Dosen     : Pak Chandra
-// ===================================================================
-
 require_once __DIR__ . '/koneksi.php';
 
 $error = '';
 
-// Proses form saat tombol Submit diklik
 if (isset($_POST['Submit'])) {
     $nim     = trim($_POST['nim'] ?? '');
     $nama    = trim($_POST['nama'] ?? '');
     $jurusan = trim($_POST['jurusan'] ?? '');
     $alamat  = trim($_POST['alamat'] ?? '');
 
-    // Validasi input tidak boleh kosong
     if (empty($nim) || empty($nama) || empty($jurusan) || empty($alamat)) {
-        $error = "Semua kolom formulir wajib diisi, tidak boleh kosong!";
+        $error = "Semua kolom formulir wajib diisi!";
     } else {
         $nim_safe     = mysqli_real_escape_string($koneksi, $nim);
         $nama_safe    = mysqli_real_escape_string($koneksi, $nama);
@@ -33,7 +24,7 @@ if (isset($_POST['Submit'])) {
             header("Location: index.php?pesan=sukses_tambah");
             exit();
         } else {
-            $error = "Gagal menyimpan ke database. Kemungkinan NIM sudah terdaftar!";
+            $error = "Gagal menyimpan ke database.";
         }
     }
 }
@@ -43,7 +34,7 @@ if (isset($_POST['Submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Mahasiswa - CRUD Multi-Page</title>
+    <title>Tambah Mahasiswa</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -54,14 +45,7 @@ if (isset($_POST['Submit'])) {
             margin: 25px auto;
             padding: 0 15px;
         }
-        h2 { margin-bottom: 5px; color: #222; }
-        .student-info {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            font-size: 13px;
-        }
+        h2 { margin-bottom: 15px; color: #222; }
         .pesan-error {
             background-color: #f8d7da;
             border: 1px solid #f5c6cb;
@@ -102,14 +86,8 @@ if (isset($_POST['Submit'])) {
 </head>
 <body>
 
-    <h2>Tugas Praktikum Pemrograman Web</h2>
-    <div class="student-info">
-        Nama: <strong>Narangga Adennas Shaputra</strong> &bull; NIM: <strong>2507421029</strong> &bull; Kelas: <strong>TMJ 3A</strong> &bull; Dosen: <strong>Pak Chandra</strong>
-    </div>
-
-    <p><a href="index.php">&laquo; Kembali ke Daftar Mahasiswa</a></p>
-
-    <h3>Form Tambah Mahasiswa Baru (Multi-Page)</h3>
+    <h2>Tambah Data Mahasiswa</h2>
+    <p><a href="index.php">&laquo; Kembali</a></p>
 
     <?php if (!empty($error)): ?>
         <div class="pesan-error"><?php echo $error; ?></div>
@@ -119,14 +97,14 @@ if (isset($_POST['Submit'])) {
         <table border="0">
             <tr>
                 <td width="150">NIM</td>
-                <td>: <input type="text" name="nim" size="30" placeholder="Contoh: 2507421029" required></td>
+                <td>: <input type="text" name="nim" size="30" required></td>
             </tr>
             <tr>
                 <td>Nama Lengkap</td>
-                <td>: <input type="text" name="nama" size="40" placeholder="Nama mahasiswa" required></td>
+                <td>: <input type="text" name="nama" size="40" required></td>
             </tr>
             <tr>
-                <td>Program Studi / Jurusan</td>
+                <td>Jurusan</td>
                 <td>: 
                     <select name="jurusan" required>
                         <option value="">-- Pilih Jurusan --</option>
@@ -139,14 +117,14 @@ if (isset($_POST['Submit'])) {
             </tr>
             <tr>
                 <td valign="top">Alamat</td>
-                <td>: <textarea name="alamat" rows="3" cols="40" placeholder="Alamat lengkap" required></textarea></td>
+                <td>: <textarea name="alamat" rows="3" cols="40" required></textarea></td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <input type="submit" name="Submit" value="Simpan Mahasiswa">
+                    <input type="submit" name="Submit" value="Simpan">
                     &nbsp;
-                    <input type="reset" value="Reset Form">
+                    <input type="reset" value="Reset">
                 </td>
             </tr>
         </table>

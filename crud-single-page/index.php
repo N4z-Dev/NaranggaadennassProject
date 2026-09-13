@@ -1,20 +1,10 @@
 <?php
-// ===================================================================
-// TUGAS PRAKTIKUM PEMROGRAMAN WEB: CRUD PHP & MYSQL
-// Implementasi 2: Single-Page CRUD (Referensi: PetaniKode)
-// Menggabungkan Create, Read, Update, Delete dalam satu file PHP
-// Mahasiswa : Narangga Adennas Shaputra
-// NIM       : 2507421029
-// Kelas     : TMJ 3A
-// Dosen     : Pak Chandra
-// ===================================================================
-
 require_once __DIR__ . '/koneksi.php';
 
 $pesan = $_GET['pesan'] ?? '';
 $aksi  = $_GET['aksi'] ?? '';
 
-// 1. PROSES CREATE (TAMBAH DATA)
+// Proses simpan
 if (isset($_POST['btn_simpan'])) {
     $nim     = trim($_POST['nim'] ?? '');
     $nama    = trim($_POST['nama'] ?? '');
@@ -43,7 +33,7 @@ if (isset($_POST['btn_simpan'])) {
     }
 }
 
-// 2. PROSES UPDATE (UBAH DATA)
+// Proses ubah
 if (isset($_POST['btn_ubah'])) {
     $id      = intval($_POST['id'] ?? 0);
     $nim     = trim($_POST['nim'] ?? '');
@@ -77,7 +67,7 @@ if (isset($_POST['btn_ubah'])) {
     }
 }
 
-// 3. PROSES DELETE (HAPUS DATA)
+// Proses hapus
 if ($aksi == 'hapus' && isset($_GET['id'])) {
     $id = intval($_GET['id']);
     $sql = "DELETE FROM mahasiswa WHERE id = $id";
@@ -90,7 +80,6 @@ if ($aksi == 'hapus' && isset($_GET['id'])) {
     }
 }
 
-// Query untuk menampilkan seluruh data (READ)
 $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
 ?>
 <!DOCTYPE html>
@@ -98,7 +87,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD PHP &amp; MySQL - Single-Page (PetaniKode)</title>
+    <title>Data Mahasiswa</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -109,14 +98,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
             margin: 25px auto;
             padding: 0 15px;
         }
-        h2 { margin-bottom: 5px; color: #222; }
-        .student-info {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            font-size: 13px;
-        }
+        h2 { margin-bottom: 15px; color: #222; }
         .nav-mode {
             background-color: #f0f4f8;
             border-left: 4px solid #0056b3;
@@ -125,7 +107,6 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
         }
         .nav-mode a {
             color: #0056b3;
-            font-weight: bold;
             text-decoration: none;
         }
         .nav-mode a:hover { text-decoration: underline; }
@@ -201,27 +182,12 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
 </head>
 <body>
 
-    <h2>Tugas Praktikum Pemrograman Web</h2>
-    
-    <div class="student-info">
-        <strong>Identitas Mahasiswa:</strong><br>
-        Nama : <strong>Narangga Adennas Shaputra</strong><br>
-        NIM : <strong>2507421029</strong><br>
-        Kelas : <strong>TMJ 3A</strong> (Teknik Multimedia dan Jaringan)<br>
-        Mata Kuliah : <strong>Pemrograman Web</strong><br>
-        Dosen Pengampu : <strong>Pak Chandra</strong>
-    </div>
-
-    <!-- Navigasi Pilihan Versi Tugas -->
     <div class="nav-mode">
-        <strong>Pilihan Versi Tugas:</strong>
-        &nbsp;&nbsp;
-        <a href="index.php">[1] Versi Multi-Page (Referensi: CodePolitan)</a>
+        <a href="index.php">Multi-Page</a>
         &nbsp;|&nbsp;
-        <strong>[2] Versi Single-Page (Referensi: PetaniKode)</strong>
+        <strong>Single-Page</strong>
     </div>
 
-    <!-- Notifikasi -->
     <?php if ($pesan == 'sukses_tambah'): ?>
         <div class="pesan-sukses">Data mahasiswa berhasil disimpan!</div>
     <?php elseif ($pesan == 'sukses_edit'): ?>
@@ -229,15 +195,12 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
     <?php elseif ($pesan == 'sukses_hapus'): ?>
         <div class="pesan-sukses">Data mahasiswa berhasil dihapus!</div>
     <?php elseif ($pesan == 'kosong'): ?>
-        <div class="pesan-error">Peringatan: Semua form input wajib diisi, tidak boleh kosong!</div>
+        <div class="pesan-error">Peringatan: Semua form wajib diisi!</div>
     <?php elseif ($pesan == 'gagal'): ?>
-        <div class="pesan-error">Terjadi kesalahan pada query database.</div>
+        <div class="pesan-error">Terjadi kesalahan pada database.</div>
     <?php endif; ?>
 
     <?php if ($aksi == 'edit' && isset($_GET['id'])): ?>
-        <!-- ============================================================== -->
-        <!-- FORM UBAH DATA (MUNCUL JIKA KLIK EDIT)                         -->
-        <!-- ============================================================== -->
         <?php 
         $id = intval($_GET['id']);
         $res = mysqli_query($koneksi, "SELECT * FROM mahasiswa WHERE id = $id LIMIT 1");
@@ -284,20 +247,17 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
         </fieldset>
 
     <?php else: ?>
-        <!-- ============================================================== -->
-        <!-- FORM TAMBAH DATA (POLA PETANIKODE)                             -->
-        <!-- ============================================================== -->
         <fieldset>
             <legend>Tambah Data Mahasiswa</legend>
             <form action="single-page.php" method="POST">
                 <table class="form-table" border="0">
                     <tr>
                         <td width="150">NIM</td>
-                        <td>: <input type="text" name="nim" placeholder="Contoh: 2507421029" size="30" required></td>
+                        <td>: <input type="text" name="nim" size="30" required></td>
                     </tr>
                     <tr>
                         <td>Nama Lengkap</td>
-                        <td>: <input type="text" name="nama" placeholder="Nama mahasiswa" size="40" required></td>
+                        <td>: <input type="text" name="nama" size="40" required></td>
                     </tr>
                     <tr>
                         <td>Jurusan</td>
@@ -313,14 +273,14 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
                     </tr>
                     <tr>
                         <td valign="top">Alamat</td>
-                        <td>: <textarea name="alamat" rows="3" cols="40" placeholder="Alamat lengkap" required></textarea></td>
+                        <td>: <textarea name="alamat" rows="3" cols="40" required></textarea></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <input type="submit" name="btn_simpan" value="Simpan Mahasiswa">
+                            <input type="submit" name="btn_simpan" value="Simpan">
                             &nbsp;
-                            <input type="reset" value="Reset Form">
+                            <input type="reset" value="Reset">
                         </td>
                     </tr>
                 </table>
@@ -328,11 +288,8 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
         </fieldset>
     <?php endif; ?>
 
-    <!-- ============================================================== -->
-    <!-- TABEL DATA MAHASISWA (POLA PETANIKODE)                         -->
-    <!-- ============================================================== -->
     <fieldset>
-        <legend>Daftar Mahasiswa (Pola PetaniKode)</legend>
+        <legend>Daftar Mahasiswa</legend>
         <table class="data-table">
             <thead>
                 <tr>
@@ -341,7 +298,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
                     <th>Nama Lengkap</th>
                     <th width="180">Jurusan</th>
                     <th>Alamat</th>
-                    <th width="130" style="text-align: center;">Tindakan</th>
+                    <th width="130" style="text-align: center;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -352,7 +309,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
                 ?>
                     <tr>
                         <td style="text-align: center;"><?php echo $no++; ?></td>
-                        <td><strong><?php echo htmlspecialchars($row['nim']); ?></strong></td>
+                        <td><?php echo htmlspecialchars($row['nim']); ?></td>
                         <td><?php echo htmlspecialchars($row['nama']); ?></td>
                         <td><?php echo htmlspecialchars($row['jurusan']); ?></td>
                         <td><?php echo htmlspecialchars($row['alamat']); ?></td>
@@ -360,7 +317,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
                             <a href="single-page.php?aksi=edit&id=<?php echo $row['id']; ?>">Ubah</a>
                             &nbsp;|&nbsp;
                             <a href="single-page.php?aksi=hapus&id=<?php echo $row['id']; ?>" 
-                               onclick="return confirm('Apakah Anda yakin ingin menghapus data <?php echo htmlspecialchars($row['nama']); ?>?');">
+                               onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                                 Hapus
                             </a>
                         </td>
