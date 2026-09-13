@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // ===================================================================
 // FILE: koneksi.php
 // Koneksi Database PHP & MySQL (TiDB Cloud Serverless)

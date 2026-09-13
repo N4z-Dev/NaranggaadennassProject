@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // ===================================================================
 // TUGAS PRAKTIKUM PEMROGRAMAN WEB: CRUD PHP & MYSQL
 // Implementasi 1: Multi-Page CRUD (Referensi: CodePolitan)

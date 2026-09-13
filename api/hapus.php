@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // ===================================================================
 // FILE: hapus.php (Multi-Page CRUD - Hapus Data)
 // REFERENSI: CodePolitan - Delete Data PHP & MySQL

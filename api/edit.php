@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // ===================================================================
 // FILE: edit.php (Multi-Page CRUD - Form Edit)
 // REFERENSI: CodePolitan - Edit Data PHP & MySQL

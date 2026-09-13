@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // ===================================================================
 // TUGAS PRAKTIKUM PEMROGRAMAN WEB: CRUD PHP & MYSQL
 // Implementasi 2: Single-Page CRUD (Referensi: PetaniKode)

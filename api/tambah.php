@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // ===================================================================
 // FILE: tambah.php (Multi-Page CRUD - Form Tambah)
 // REFERENSI: CodePolitan - Tambah Data PHP & MySQL
