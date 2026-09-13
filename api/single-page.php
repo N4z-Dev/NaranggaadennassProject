@@ -1,39 +1,49 @@
-<?php
+﻿<?php
 // ===================================================================
-// FILE: api/single-page.php (CRUD Single-Page di Vercel Cloud)
-// REFERENSI: PetaniKode - Pola Satu File PHP
+// TUGAS PRAKTIKUM PEMROGRAMAN WEB: CRUD PHP & MYSQL
+// Implementasi 2: Single-Page CRUD (Referensi: PetaniKode)
+// Menggabungkan Create, Read, Update, Delete dalam satu file PHP
+// Mahasiswa : Narangga Adennas Shaputra
+// NIM       : 2507421029
+// Kelas     : TMJ 3A
+// Dosen     : Pak Chandra
 // ===================================================================
 
 require_once __DIR__ . '/koneksi.php';
 
-$pesan = "";
-$pesan_tipe = "";
+$pesan = $_GET['pesan'] ?? '';
+$aksi  = $_GET['aksi'] ?? '';
 
-// Aksi CREATE / TAMBAH
+// 1. PROSES CREATE (TAMBAH DATA)
 if (isset($_POST['btn_simpan'])) {
     $nim     = trim($_POST['nim'] ?? '');
     $nama    = trim($_POST['nama'] ?? '');
     $jurusan = trim($_POST['jurusan'] ?? '');
     $alamat  = trim($_POST['alamat'] ?? '');
 
-    // Validasi server-side
-    if (!empty($nim) && !empty($nama) && !empty($jurusan) && !empty($alamat)) {
-        try {
-            $stmt = $db->prepare("INSERT INTO mahasiswa (nim, nama, jurusan, alamat) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$nim, $nama, $jurusan, $alamat]);
-            header("Location: single-page.php?status=sukses_tambah");
-            exit();
-        } catch (Exception $e) {
-            $pesan = "Gagal menyimpan data! NIM mungkin sudah terdaftar.";
-            $pesan_tipe = "danger";
-        }
+    if (empty($nim) || empty($nama) || empty($jurusan) || empty($alamat)) {
+        header("Location: single-page.php?pesan=kosong");
+        exit();
+    }
+
+    $nim_safe     = mysqli_real_escape_string($koneksi, $nim);
+    $nama_safe    = mysqli_real_escape_string($koneksi, $nama);
+    $jurusan_safe = mysqli_real_escape_string($koneksi, $jurusan);
+    $alamat_safe  = mysqli_real_escape_string($koneksi, $alamat);
+
+    $sql = "INSERT INTO mahasiswa (nim, nama, jurusan, alamat) 
+            VALUES ('$nim_safe', '$nama_safe', '$jurusan_safe', '$alamat_safe')";
+    
+    if (mysqli_query($koneksi, $sql)) {
+        header("Location: single-page.php?pesan=sukses_tambah");
+        exit();
     } else {
-        $pesan = "Semua field formulir wajib diisi, tidak boleh kosong!";
-        $pesan_tipe = "danger";
+        header("Location: single-page.php?pesan=gagal");
+        exit();
     }
 }
 
-// Aksi UPDATE / UBAH
+// 2. PROSES UPDATE (UBAH DATA)
 if (isset($_POST['btn_ubah'])) {
     $id      = intval($_POST['id'] ?? 0);
     $nim     = trim($_POST['nim'] ?? '');
@@ -41,208 +51,333 @@ if (isset($_POST['btn_ubah'])) {
     $jurusan = trim($_POST['jurusan'] ?? '');
     $alamat  = trim($_POST['alamat'] ?? '');
 
-    if (!empty($id) && !empty($nim) && !empty($nama) && !empty($jurusan) && !empty($alamat)) {
-        try {
-            $stmt = $db->prepare("UPDATE mahasiswa SET nim = ?, nama = ?, jurusan = ?, alamat = ? WHERE id = ?");
-            $stmt->execute([$nim, $nama, $jurusan, $alamat, $id]);
-            header("Location: single-page.php?status=sukses_edit");
-            exit();
-        } catch (Exception $e) {
-            $pesan = "Gagal memperbarui data!";
-            $pesan_tipe = "danger";
-        }
-    } else {
-        $pesan = "Semua data wajib diisi saat mengubah data!";
-        $pesan_tipe = "danger";
-    }
-}
-
-// Aksi DELETE / HAPUS
-if (isset($_GET['aksi']) && $_GET['aksi'] == 'delete' && isset($_GET['id'])) {
-    $id = intval($_GET['id']);
-    try {
-        $stmt = $db->prepare("DELETE FROM mahasiswa WHERE id = ?");
-        $stmt->execute([$id]);
-        header("Location: single-page.php?status=sukses_hapus");
+    if (empty($id) || empty($nim) || empty($nama) || empty($jurusan) || empty($alamat)) {
+        header("Location: single-page.php?pesan=kosong");
         exit();
-    } catch (Exception $e) {
-        $pesan = "Gagal menghapus data!";
-        $pesan_tipe = "danger";
+    }
+
+    $nim_safe     = mysqli_real_escape_string($koneksi, $nim);
+    $nama_safe    = mysqli_real_escape_string($koneksi, $nama);
+    $jurusan_safe = mysqli_real_escape_string($koneksi, $jurusan);
+    $alamat_safe  = mysqli_real_escape_string($koneksi, $alamat);
+
+    $sql = "UPDATE mahasiswa SET 
+                nim = '$nim_safe', 
+                nama = '$nama_safe', 
+                jurusan = '$jurusan_safe', 
+                alamat = '$alamat_safe' 
+            WHERE id = $id";
+    
+    if (mysqli_query($koneksi, $sql)) {
+        header("Location: single-page.php?pesan=sukses_edit");
+        exit();
+    } else {
+        header("Location: single-page.php?pesan=gagal");
+        exit();
     }
 }
 
-// Query Ambil Seluruh Data
-$mahasiswa_list = $db->query("SELECT * FROM mahasiswa ORDER BY id DESC")->fetchAll();
-
-// Jika sedang edit, ambil data lama
-$data_edit = null;
-if (isset($_GET['aksi']) && $_GET['aksi'] == 'update' && isset($_GET['id'])) {
-    $id_edit = intval($_GET['id']);
-    $stmt = $db->prepare("SELECT * FROM mahasiswa WHERE id = ? LIMIT 1");
-    $stmt->execute([$id_edit]);
-    $data_edit = $stmt->fetch();
+// 3. PROSES DELETE (HAPUS DATA)
+if ($aksi == 'hapus' && isset($_GET['id'])) {
+    $id = intval($_GET['id']);
+    $sql = "DELETE FROM mahasiswa WHERE id = $id";
+    if (mysqli_query($koneksi, $sql)) {
+        header("Location: single-page.php?pesan=sukses_hapus");
+        exit();
+    } else {
+        header("Location: single-page.php?pesan=gagal");
+        exit();
+    }
 }
+
+// Query untuk menampilkan seluruh data (READ)
+$query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Single-Page CRUD (PHP Cloud) | Narangga 2507421029</title>
+    <title>CRUD PHP &amp; MySQL - Single-Page (PetaniKode)</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background: #f8fafc; color: #0f172a; padding: 24px 16px; }
-        .container { max-width: 960px; margin: 0 auto; background: #fff; border-radius: 10px; border: 1px solid #e2e8f0; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid #e2e8f0; }
-        h1 { font-size: 20px; font-weight: 700; }
-        p.sub { font-size: 13px; color: #64748b; margin-top: 2px; }
-        .alert { padding: 12px 16px; border-radius: 6px; font-size: 14px; margin-bottom: 16px; }
-        .alert-success { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
-        .alert-danger { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
-        .card-form { background: #f1f5f9; padding: 18px; border-radius: 8px; margin-bottom: 24px; border: 1px solid #e2e8f0; }
-        .card-form.edit-mode { background: #fefce8; border-color: #fef08a; }
-        .form-group { margin-bottom: 12px; }
-        label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; color: #334155; }
-        input[type="text"], select, textarea { width: 100%; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; outline: none; background: #fff; }
-        input[type="text"]:focus, select:focus, textarea:focus { border-color: #2563eb; }
-        .btn { display: inline-block; padding: 8px 14px; font-size: 13px; font-weight: 600; border-radius: 6px; text-decoration: none; border: none; cursor: pointer; }
-        .btn-primary { background: #2563eb; color: #fff; }
-        .btn-success { background: #16a34a; color: #fff; }
-        .btn-danger { background: #dc2626; color: #fff; }
-        .btn-secondary { background: #64748b; color: #fff; }
-        .btn-sm { padding: 4px 10px; font-size: 12px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
-        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
-        th { background: #f8fafc; color: #475569; font-weight: 600; }
-        tr:hover td { background: #f8fafc; }
-        .badge { font-size: 11px; padding: 3px 8px; border-radius: 999px; font-weight: 600; background: #eff6ff; color: #2563eb; }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 0 15px;
+        }
+        h2 { margin-bottom: 5px; color: #222; }
+        .student-info {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+        .nav-mode {
+            background-color: #f0f4f8;
+            border-left: 4px solid #0056b3;
+            padding: 8px 12px;
+            margin-bottom: 20px;
+        }
+        .nav-mode a {
+            color: #0056b3;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .nav-mode a:hover { text-decoration: underline; }
+        .pesan-sukses {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 10px 12px;
+            margin-bottom: 15px;
+        }
+        .pesan-error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 10px 12px;
+            margin-bottom: 15px;
+        }
+        fieldset {
+            border: 1px solid #bbb;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        legend {
+            font-weight: bold;
+            padding: 0 8px;
+            color: #222;
+        }
+        table.form-table td {
+            padding: 5px 8px;
+        }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table.data-table, table.data-table th, table.data-table td {
+            border: 1px solid #bbb;
+        }
+        table.data-table th, table.data-table td {
+            padding: 8px 12px;
+            text-align: left;
+        }
+        table.data-table th {
+            background-color: #f2f2f2;
+        }
+        table.data-table tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        input[type="text"], select, textarea {
+            padding: 5px 8px;
+            font-size: 14px;
+            border: 1px solid #aaa;
+            box-sizing: border-box;
+        }
+        input[type="submit"], input[type="reset"] {
+            padding: 6px 14px;
+            font-size: 13px;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            border: 1px solid #aaa;
+        }
+        input[type="submit"]:hover, input[type="reset"]:hover {
+            background-color: #e0e0e0;
+        }
+        a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <div>
-            <h1>CRUD Single-Page (PHP di Vercel Cloud)</h1>
-            <p class="sub">Pola PetaniKode &bull; Narangga Adennas (2507421029) &bull; Mode Database: <span class="badge"><?php echo strtoupper($driver); ?> CLOUD</span></p>
-        </div>
-        <div>
-            <a href="multi-page.php" class="btn btn-secondary btn-sm">Buka Versi Multi-Page &rarr;</a>
-            <a href="../index.html" class="btn btn-primary btn-sm">&larr; Portal Utama</a>
-        </div>
-    </header>
+    <h2>Tugas Praktikum Pemrograman Web</h2>
+    
+    <div class="student-info">
+        <strong>Identitas Mahasiswa:</strong><br>
+        Nama : <strong>Narangga Adennas Shaputra</strong><br>
+        NIM : <strong>2507421029</strong><br>
+        Kelas : <strong>TMJ 3A</strong> (Teknik Multimedia dan Jaringan)<br>
+        Mata Kuliah : <strong>Pemrograman Web</strong><br>
+        Dosen Pengampu : <strong>Pak Chandra</strong>
+    </div>
 
-    <?php if (isset($_GET['status'])): ?>
-        <?php if ($_GET['status'] == 'sukses_tambah'): ?>
-            <div class="alert alert-success">Data mahasiswa berhasil disimpan ke database!</div>
-        <?php elseif ($_GET['status'] == 'sukses_edit'): ?>
-            <div class="alert alert-success">Perubahan data mahasiswa berhasil diperbarui!</div>
-        <?php elseif ($_GET['status'] == 'sukses_hapus'): ?>
-            <div class="alert alert-success">Data mahasiswa berhasil dihapus dari database!</div>
-        <?php endif; ?>
+    <!-- Navigasi Pilihan Versi Tugas -->
+    <div class="nav-mode">
+        <strong>Pilihan Versi Tugas:</strong>
+        &nbsp;&nbsp;
+        <a href="index.php">[1] Versi Multi-Page (Referensi: CodePolitan)</a>
+        &nbsp;|&nbsp;
+        <strong>[2] Versi Single-Page (Referensi: PetaniKode)</strong>
+    </div>
+
+    <!-- Notifikasi -->
+    <?php if ($pesan == 'sukses_tambah'): ?>
+        <div class="pesan-sukses">Data mahasiswa berhasil disimpan!</div>
+    <?php elseif ($pesan == 'sukses_edit'): ?>
+        <div class="pesan-sukses">Data mahasiswa berhasil diperbarui!</div>
+    <?php elseif ($pesan == 'sukses_hapus'): ?>
+        <div class="pesan-sukses">Data mahasiswa berhasil dihapus!</div>
+    <?php elseif ($pesan == 'kosong'): ?>
+        <div class="pesan-error">Peringatan: Semua form input wajib diisi, tidak boleh kosong!</div>
+    <?php elseif ($pesan == 'gagal'): ?>
+        <div class="pesan-error">Terjadi kesalahan pada query database.</div>
     <?php endif; ?>
 
-    <?php if (!empty($pesan)): ?>
-        <div class="alert alert-<?php echo $pesan_tipe; ?>"><?php echo $pesan; ?></div>
-    <?php endif; ?>
-
-    <?php if ($data_edit): ?>
-        <!-- FORM EDIT DATA (UPDATE) -->
-        <div class="card-form edit-mode">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                <h2 style="font-size:16px;">Form Edit Data Mahasiswa</h2>
-                <a href="single-page.php" class="btn btn-secondary btn-sm">Batal Edit</a>
-            </div>
+    <?php if ($aksi == 'edit' && isset($_GET['id'])): ?>
+        <!-- ============================================================== -->
+        <!-- FORM UBAH DATA (MUNCUL JIKA KLIK EDIT)                         -->
+        <!-- ============================================================== -->
+        <?php 
+        $id = intval($_GET['id']);
+        $res = mysqli_query($koneksi, "SELECT * FROM mahasiswa WHERE id = $id LIMIT 1");
+        $data = mysqli_fetch_assoc($res);
+        ?>
+        <fieldset>
+            <legend>Ubah Data Mahasiswa</legend>
             <form action="single-page.php" method="POST">
-                <input type="hidden" name="id" value="<?php echo $data_edit['id']; ?>">
-                <div class="form-group">
-                    <label>NIM:</label>
-                    <input type="text" name="nim" value="<?php echo htmlspecialchars($data_edit['nim']); ?>" required>
-                </div>
-                <div class="form-group">
-                    <label>Nama Lengkap:</label>
-                    <input type="text" name="nama" value="<?php echo htmlspecialchars($data_edit['nama']); ?>" required>
-                </div>
-                <div class="form-group">
-                    <label>Jurusan:</label>
-                    <select name="jurusan" required>
-                        <option value="Teknik Informatika" <?php echo ($data_edit['jurusan'] == 'Teknik Informatika') ? 'selected' : ''; ?>>Teknik Informatika</option>
-                        <option value="Sistem Informasi" <?php echo ($data_edit['jurusan'] == 'Sistem Informasi') ? 'selected' : ''; ?>>Sistem Informasi</option>
-                        <option value="Teknik Komputer" <?php echo ($data_edit['jurusan'] == 'Teknik Komputer') ? 'selected' : ''; ?>>Teknik Komputer</option>
-                        <option value="Teknologi Multimedia" <?php echo ($data_edit['jurusan'] == 'Teknologi Multimedia') ? 'selected' : ''; ?>>Teknologi Multimedia</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Alamat:</label>
-                    <textarea name="alamat" rows="3" required><?php echo htmlspecialchars($data_edit['alamat']); ?></textarea>
-                </div>
-                <button type="submit" name="btn_ubah" class="btn btn-success">Simpan Perubahan</button>
+                <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                <table class="form-table" border="0">
+                    <tr>
+                        <td width="150">NIM</td>
+                        <td>: <input type="text" name="nim" value="<?php echo htmlspecialchars($data['nim']); ?>" size="30" required></td>
+                    </tr>
+                    <tr>
+                        <td>Nama Lengkap</td>
+                        <td>: <input type="text" name="nama" value="<?php echo htmlspecialchars($data['nama']); ?>" size="40" required></td>
+                    </tr>
+                    <tr>
+                        <td>Jurusan</td>
+                        <td>: 
+                            <select name="jurusan" required>
+                                <option value="Teknik Informatika" <?php echo ($data['jurusan'] == 'Teknik Informatika') ? 'selected' : ''; ?>>Teknik Informatika</option>
+                                <option value="Sistem Informasi" <?php echo ($data['jurusan'] == 'Sistem Informasi') ? 'selected' : ''; ?>>Sistem Informasi</option>
+                                <option value="Teknik Komputer" <?php echo ($data['jurusan'] == 'Teknik Komputer') ? 'selected' : ''; ?>>Teknik Komputer</option>
+                                <option value="Teknologi Multimedia" <?php echo ($data['jurusan'] == 'Teknologi Multimedia') ? 'selected' : ''; ?>>Teknologi Multimedia</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">Alamat</td>
+                        <td>: <textarea name="alamat" rows="3" cols="40" required><?php echo htmlspecialchars($data['alamat']); ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" name="btn_ubah" value="Simpan Perubahan">
+                            &nbsp;
+                            <a href="single-page.php">Batal</a>
+                        </td>
+                    </tr>
+                </table>
             </form>
-        </div>
+        </fieldset>
+
     <?php else: ?>
-        <!-- FORM TAMBAH DATA (CREATE) -->
-        <div class="card-form">
-            <h2 style="font-size:16px; margin-bottom:12px;">Form Tambah Mahasiswa Baru</h2>
+        <!-- ============================================================== -->
+        <!-- FORM TAMBAH DATA (POLA PETANIKODE)                             -->
+        <!-- ============================================================== -->
+        <fieldset>
+            <legend>Tambah Data Mahasiswa</legend>
             <form action="single-page.php" method="POST">
-                <div class="form-group">
-                    <label>NIM:</label>
-                    <input type="text" name="nim" placeholder="Contoh: 2507421029" required autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label>Nama Lengkap:</label>
-                    <input type="text" name="nama" placeholder="Masukkan nama mahasiswa" required autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label>Jurusan:</label>
-                    <select name="jurusan" required>
-                        <option value="">-- Pilih Jurusan --</option>
-                        <option value="Teknik Informatika">Teknik Informatika</option>
-                        <option value="Sistem Informasi">Sistem Informasi</option>
-                        <option value="Teknik Komputer">Teknik Komputer</option>
-                        <option value="Teknologi Multimedia">Teknologi Multimedia</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Alamat:</label>
-                    <textarea name="alamat" rows="3" placeholder="Masukkan alamat lengkap" required></textarea>
-                </div>
-                <button type="submit" name="btn_simpan" class="btn btn-primary">Simpan Mahasiswa</button>
+                <table class="form-table" border="0">
+                    <tr>
+                        <td width="150">NIM</td>
+                        <td>: <input type="text" name="nim" placeholder="Contoh: 2507421029" size="30" required></td>
+                    </tr>
+                    <tr>
+                        <td>Nama Lengkap</td>
+                        <td>: <input type="text" name="nama" placeholder="Nama mahasiswa" size="40" required></td>
+                    </tr>
+                    <tr>
+                        <td>Jurusan</td>
+                        <td>: 
+                            <select name="jurusan" required>
+                                <option value="">-- Pilih Jurusan --</option>
+                                <option value="Teknik Informatika">Teknik Informatika</option>
+                                <option value="Sistem Informasi">Sistem Informasi</option>
+                                <option value="Teknik Komputer">Teknik Komputer</option>
+                                <option value="Teknologi Multimedia">Teknologi Multimedia</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">Alamat</td>
+                        <td>: <textarea name="alamat" rows="3" cols="40" placeholder="Alamat lengkap" required></textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" name="btn_simpan" value="Simpan Mahasiswa">
+                            &nbsp;
+                            <input type="reset" value="Reset Form">
+                        </td>
+                    </tr>
+                </table>
             </form>
-        </div>
+        </fieldset>
     <?php endif; ?>
 
-    <!-- TABEL DATA (READ) -->
-    <h2 style="font-size:16px; margin-top:20px; margin-bottom:10px;">Daftar Mahasiswa Terdaftar (<?php echo count($mahasiswa_list); ?> Data)</h2>
-    <div style="overflow-x:auto;">
-        <table>
+    <!-- ============================================================== -->
+    <!-- TABEL DATA MAHASISWA (POLA PETANIKODE)                         -->
+    <!-- ============================================================== -->
+    <fieldset>
+        <legend>Daftar Mahasiswa (Pola PetaniKode)</legend>
+        <table class="data-table">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>NIM</th>
-                    <th>Nama</th>
-                    <th>Jurusan</th>
+                    <th width="40" style="text-align: center;">No</th>
+                    <th width="120">NIM</th>
+                    <th>Nama Lengkap</th>
+                    <th width="180">Jurusan</th>
                     <th>Alamat</th>
-                    <th style="text-align:center;">Aksi</th>
+                    <th width="130" style="text-align: center;">Tindakan</th>
                 </tr>
             </thead>
             <tbody>
-                <?php $no = 1; foreach ($mahasiswa_list as $row): ?>
-                <tr>
-                    <td><?php echo $no++; ?></td>
-                    <td><strong><?php echo htmlspecialchars($row['nim']); ?></strong></td>
-                    <td><?php echo htmlspecialchars($row['nama']); ?></td>
-                    <td><?php echo htmlspecialchars($row['jurusan']); ?></td>
-                    <td><?php echo htmlspecialchars($row['alamat']); ?></td>
-                    <td style="text-align:center;">
-                        <a href="single-page.php?aksi=update&id=<?php echo $row['id']; ?>" class="btn btn-success btn-sm">Edit</a>
-                        <a href="single-page.php?aksi=delete&id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus data <?php echo htmlspecialchars($row['nama']); ?>?');">Hapus</a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
+                <?php 
+                $no = 1;
+                if ($query && mysqli_num_rows($query) > 0):
+                    while ($row = mysqli_fetch_assoc($query)): 
+                ?>
+                    <tr>
+                        <td style="text-align: center;"><?php echo $no++; ?></td>
+                        <td><strong><?php echo htmlspecialchars($row['nim']); ?></strong></td>
+                        <td><?php echo htmlspecialchars($row['nama']); ?></td>
+                        <td><?php echo htmlspecialchars($row['jurusan']); ?></td>
+                        <td><?php echo htmlspecialchars($row['alamat']); ?></td>
+                        <td style="text-align: center;">
+                            <a href="single-page.php?aksi=edit&id=<?php echo $row['id']; ?>">Ubah</a>
+                            &nbsp;|&nbsp;
+                            <a href="single-page.php?aksi=hapus&id=<?php echo $row['id']; ?>" 
+                               onclick="return confirm('Apakah Anda yakin ingin menghapus data <?php echo htmlspecialchars($row['nama']); ?>?');">
+                                Hapus
+                            </a>
+                        </td>
+                    </tr>
+                <?php 
+                    endwhile;
+                else:
+                ?>
+                    <tr>
+                        <td colspan="6" style="text-align: center; color: #777; padding: 20px;">
+                            Belum ada data mahasiswa.
+                        </td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
-    </div>
-</div>
+    </fieldset>
 
 </body>
 </html>
