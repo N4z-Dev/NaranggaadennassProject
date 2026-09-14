@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "functions": {
+    "api/*.php": {
+      "runtime": "vercel-php@0.9.0"
+    }
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/api/index.php" },
+    { "source": "/index.html", "destination": "/api/index.php" },
+    { "source": "/index.php", "destination": "/api/index.php" },
+    { "source": "/single-page.php", "destination": "/api/single-page.php" },
+    { "source": "/tambah.php", "destination": "/api/tambah.php" },
+    { "source": "/edit.php", "destination": "/api/edit.php" },
+    { "source": "/hapus.php", "destination": "/api/hapus.php" },
+    { "source": "/crud-multi-page", "destination": "/api/index.php" },
+    { "source": "/crud-multi-page/", "destination": "/api/index.php" },
+    { "source": "/crud-multi-page/index.php", "destination": "/api/index.php" },
+    { "source": "/crud-multi-page/tambah.php", "destination": "/api/tambah.php" },
+    { "source": "/crud-multi-page/edit.php", "destination": "/api/edit.php" },
+    { "source": "/crud-multi-page/hapus.php", "destination": "/api/hapus.php" },
+    { "source": "/crud-single-page", "destination": "/api/single-page.php" },
+    { "source": "/crud-single-page/", "destination": "/api/single-page.php" },
+    { "source": "/crud-single-page/index.php", "destination": "/api/single-page.php" }
+  ]
+}
