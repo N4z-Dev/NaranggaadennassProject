@@ -1,8 +1,6 @@
 <?php
 require_once __DIR__ . '/koneksi.php';
 
-$error = '';
-
 if (isset($_POST['Update'])) {
     $id      = intval($_POST['id'] ?? 0);
     $nim     = trim($_POST['nim'] ?? '');
@@ -11,7 +9,8 @@ if (isset($_POST['Update'])) {
     $alamat  = trim($_POST['alamat'] ?? '');
 
     if (empty($id) || empty($nim) || empty($nama) || empty($jurusan) || empty($alamat)) {
-        $error = "Semua data wajib diisi!";
+        header("Location: index.php?pesan=gagal_validasi");
+        exit();
     } else {
         $nim_safe     = mysqli_real_escape_string($koneksi, $nim);
         $nama_safe    = mysqli_real_escape_string($koneksi, $nama);
@@ -29,7 +28,13 @@ if (isset($_POST['Update'])) {
             header("Location: index.php?pesan=sukses_edit");
             exit();
         } else {
-            $error = "Gagal memperbarui data: " . mysqli_error($koneksi);
+            if (mysqli_errno($koneksi) == 1062) {
+                header("Location: index.php?pesan=duplikat_nim");
+            } else {
+                $err = mysqli_error($koneksi);
+                header("Location: index.php?pesan=gagal_db&err=" . urlencode($err));
+            }
+            exit();
         }
     }
 }
@@ -39,7 +44,7 @@ $res = mysqli_query($koneksi, "SELECT * FROM mahasiswa WHERE id = $id LIMIT 1");
 $data = mysqli_fetch_assoc($res);
 
 if (!$data) {
-    die("Data tidak ditemukan! <a href='index.php'>Kembali</a>");
+    die("Data mahasiswa tidak ditemukan! <a href='index.php'>Kembali</a>");
 }
 ?>
 <!DOCTYPE html>
@@ -59,12 +64,15 @@ if (!$data) {
             padding: 0 15px;
         }
         h2 { margin-bottom: 15px; color: #222; }
-        .pesan-error {
+        .alert {
+            padding: 10px 14px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .alert-danger {
             background-color: #f8d7da;
             border: 1px solid #f5c6cb;
             color: #721c24;
-            padding: 10px 12px;
-            margin-bottom: 15px;
         }
         table {
             margin-top: 15px;
@@ -100,11 +108,7 @@ if (!$data) {
 <body>
 
     <h2>Edit Data Mahasiswa</h2>
-    <p><a href="index.php">&laquo; Kembali</a></p>
-
-    <?php if (!empty($error)): ?>
-        <div class="pesan-error"><?php echo $error; ?></div>
-    <?php endif; ?>
+    <p><a href="index.php">&laquo; Kembali ke Daftar</a></p>
 
     <form action="edit.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
@@ -123,9 +127,9 @@ if (!$data) {
                 <td>: 
                     <select name="jurusan" required>
                         <option value="Teknik Informatika" <?php echo ($data['jurusan'] == 'Teknik Informatika') ? 'selected' : ''; ?>>Teknik Informatika</option>
-                        <option value="Sistem Informasi" <?php echo ($data['jurusan'] == 'Sistem Informasi') ? 'selected' : ''; ?>>Sistem Informasi</option>
+                        <option value="Teknik Multimedia dan Jaringan" <?php echo ($data['jurusan'] == 'Teknik Multimedia dan Jaringan') ? 'selected' : ''; ?>>Teknik Multimedia dan Jaringan</option>
                         <option value="Teknik Komputer" <?php echo ($data['jurusan'] == 'Teknik Komputer') ? 'selected' : ''; ?>>Teknik Komputer</option>
-                        <option value="Teknologi Multimedia" <?php echo ($data['jurusan'] == 'Teknologi Multimedia') ? 'selected' : ''; ?>>Teknologi Multimedia</option>
+                        <option value="Sistem Informasi" <?php echo ($data['jurusan'] == 'Sistem Informasi') ? 'selected' : ''; ?>>Sistem Informasi</option>
                     </select>
                 </td>
             </tr>

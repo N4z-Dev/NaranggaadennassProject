@@ -11,7 +11,8 @@ if ($id > 0) {
         header("Location: index.php?pesan=sukses_hapus");
         exit();
     } else {
-        header("Location: index.php?pesan=gagal_db");
+        $err = mysqli_error($koneksi);
+        header("Location: index.php?pesan=gagal_db&err=" . urlencode($err));
         exit();
     }
 } else {

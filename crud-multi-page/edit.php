@@ -7,7 +7,7 @@ $hasil = mysqli_query($koneksi, $query);
 $data = mysqli_fetch_assoc($hasil);
 
 if (!$data) {
-    die("Data tidak ditemukan! <a href='index.php'>Kembali</a>");
+    die("Data mahasiswa tidak ditemukan! <a href='index.php'>Kembali</a>");
 }
 ?>
 <!DOCTYPE html>
@@ -22,9 +22,10 @@ if (!$data) {
 
 <div class="container">
     <h2>Edit Data Mahasiswa</h2>
-    <p><a href="index.php">&laquo; Kembali</a></p>
+    <p><a href="index.php">&laquo; Kembali ke Daftar</a></p>
 
     <form action="proses_edit.php" method="POST">
+        <!-- Hidden input untuk ID data yang akan diupdate -->
         <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
 
         <table border="0">
@@ -41,9 +42,9 @@ if (!$data) {
                 <td>: 
                     <select name="jurusan" required>
                         <option value="Teknik Informatika" <?php echo ($data['jurusan'] == 'Teknik Informatika') ? 'selected' : ''; ?>>Teknik Informatika</option>
-                        <option value="Sistem Informasi" <?php echo ($data['jurusan'] == 'Sistem Informasi') ? 'selected' : ''; ?>>Sistem Informasi</option>
+                        <option value="Teknik Multimedia dan Jaringan" <?php echo ($data['jurusan'] == 'Teknik Multimedia dan Jaringan') ? 'selected' : ''; ?>>Teknik Multimedia dan Jaringan</option>
                         <option value="Teknik Komputer" <?php echo ($data['jurusan'] == 'Teknik Komputer') ? 'selected' : ''; ?>>Teknik Komputer</option>
-                        <option value="Teknologi Multimedia" <?php echo ($data['jurusan'] == 'Teknologi Multimedia') ? 'selected' : ''; ?>>Teknologi Multimedia</option>
+                        <option value="Sistem Informasi" <?php echo ($data['jurusan'] == 'Sistem Informasi') ? 'selected' : ''; ?>>Sistem Informasi</option>
                     </select>
                 </td>
             </tr>

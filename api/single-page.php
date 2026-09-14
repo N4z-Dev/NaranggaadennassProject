@@ -11,8 +11,9 @@ if (isset($_POST['btn_simpan'])) {
     $jurusan = trim($_POST['jurusan'] ?? '');
     $alamat  = trim($_POST['alamat'] ?? '');
 
+    // Validasi form tidak boleh kosong
     if (empty($nim) || empty($nama) || empty($jurusan) || empty($alamat)) {
-        header("Location: single-page.php?pesan=kosong");
+        header("Location: index.php?pesan=kosong");
         exit();
     }
 
@@ -25,10 +26,15 @@ if (isset($_POST['btn_simpan'])) {
             VALUES ('$nim_safe', '$nama_safe', '$jurusan_safe', '$alamat_safe')";
     
     if (mysqli_query($koneksi, $sql)) {
-        header("Location: single-page.php?pesan=sukses_tambah");
+        header("Location: index.php?pesan=sukses_tambah");
         exit();
     } else {
-        header("Location: single-page.php?pesan=gagal");
+        if (mysqli_errno($koneksi) == 1062) {
+            header("Location: index.php?pesan=duplikat_nim");
+        } else {
+            $err = mysqli_error($koneksi);
+            header("Location: index.php?pesan=gagal&err=" . urlencode($err));
+        }
         exit();
     }
 }
@@ -41,8 +47,9 @@ if (isset($_POST['btn_ubah'])) {
     $jurusan = trim($_POST['jurusan'] ?? '');
     $alamat  = trim($_POST['alamat'] ?? '');
 
+    // Validasi form tidak boleh kosong
     if (empty($id) || empty($nim) || empty($nama) || empty($jurusan) || empty($alamat)) {
-        header("Location: single-page.php?pesan=kosong");
+        header("Location: index.php?pesan=kosong");
         exit();
     }
 
@@ -59,10 +66,15 @@ if (isset($_POST['btn_ubah'])) {
             WHERE id = $id";
     
     if (mysqli_query($koneksi, $sql)) {
-        header("Location: single-page.php?pesan=sukses_edit");
+        header("Location: index.php?pesan=sukses_edit");
         exit();
     } else {
-        header("Location: single-page.php?pesan=gagal");
+        if (mysqli_errno($koneksi) == 1062) {
+            header("Location: index.php?pesan=duplikat_nim");
+        } else {
+            $err = mysqli_error($koneksi);
+            header("Location: index.php?pesan=gagal&err=" . urlencode($err));
+        }
         exit();
     }
 }
@@ -72,14 +84,16 @@ if ($aksi == 'hapus' && isset($_GET['id'])) {
     $id = intval($_GET['id']);
     $sql = "DELETE FROM mahasiswa WHERE id = $id";
     if (mysqli_query($koneksi, $sql)) {
-        header("Location: single-page.php?pesan=sukses_hapus");
+        header("Location: index.php?pesan=sukses_hapus");
         exit();
     } else {
-        header("Location: single-page.php?pesan=gagal");
+        $err = mysqli_error($koneksi);
+        header("Location: index.php?pesan=gagal&err=" . urlencode($err));
         exit();
     }
 }
 
+// Ambil data mahasiswa
 $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
 ?>
 <!DOCTYPE html>
@@ -101,7 +115,6 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
         h2 { margin-bottom: 15px; color: #222; }
         .nav-mode {
             background-color: #f0f4f8;
-            border-left: 4px solid #0056b3;
             padding: 8px 12px;
             margin-bottom: 20px;
         }
@@ -188,6 +201,8 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
         <strong>Single-Page</strong>
     </div>
 
+    <h2>Data Mahasiswa</h2>
+
     <?php if ($pesan == 'sukses_tambah'): ?>
         <div class="pesan-sukses">Data mahasiswa berhasil disimpan!</div>
     <?php elseif ($pesan == 'sukses_edit'): ?>
@@ -196,8 +211,12 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
         <div class="pesan-sukses">Data mahasiswa berhasil dihapus!</div>
     <?php elseif ($pesan == 'kosong'): ?>
         <div class="pesan-error">Peringatan: Semua form wajib diisi!</div>
+    <?php elseif ($pesan == 'duplikat_nim'): ?>
+        <div class="pesan-error">Gagal menyimpan: <strong>NIM sudah terdaftar</strong> di database! Silakan gunakan NIM lain yang belum ada.</div>
     <?php elseif ($pesan == 'gagal'): ?>
-        <div class="pesan-error">Terjadi kesalahan pada database.</div>
+        <div class="pesan-error">
+            Terjadi kesalahan pada database<?php echo !empty($_GET['err']) ? ': ' . htmlspecialchars($_GET['err']) : '.'; ?>
+        </div>
     <?php endif; ?>
 
     <?php if ($aksi == 'edit' && isset($_GET['id'])): ?>
@@ -208,7 +227,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
         ?>
         <fieldset>
             <legend>Ubah Data Mahasiswa</legend>
-            <form action="single-page.php" method="POST">
+            <form action="index.php" method="POST">
                 <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
                 <table class="form-table" border="0">
                     <tr>
@@ -224,9 +243,9 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
                         <td>: 
                             <select name="jurusan" required>
                                 <option value="Teknik Informatika" <?php echo ($data['jurusan'] == 'Teknik Informatika') ? 'selected' : ''; ?>>Teknik Informatika</option>
-                                <option value="Sistem Informasi" <?php echo ($data['jurusan'] == 'Sistem Informasi') ? 'selected' : ''; ?>>Sistem Informasi</option>
+                                <option value="Teknik Multimedia dan Jaringan" <?php echo ($data['jurusan'] == 'Teknik Multimedia dan Jaringan') ? 'selected' : ''; ?>>Teknik Multimedia dan Jaringan</option>
                                 <option value="Teknik Komputer" <?php echo ($data['jurusan'] == 'Teknik Komputer') ? 'selected' : ''; ?>>Teknik Komputer</option>
-                                <option value="Teknologi Multimedia" <?php echo ($data['jurusan'] == 'Teknologi Multimedia') ? 'selected' : ''; ?>>Teknologi Multimedia</option>
+                                <option value="Sistem Informasi" <?php echo ($data['jurusan'] == 'Sistem Informasi') ? 'selected' : ''; ?>>Sistem Informasi</option>
                             </select>
                         </td>
                     </tr>
@@ -239,7 +258,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
                         <td>
                             <input type="submit" name="btn_ubah" value="Simpan Perubahan">
                             &nbsp;
-                            <a href="single-page.php">Batal</a>
+                            <a href="index.php">Batal</a>
                         </td>
                     </tr>
                 </table>
@@ -249,11 +268,11 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
     <?php else: ?>
         <fieldset>
             <legend>Tambah Data Mahasiswa</legend>
-            <form action="single-page.php" method="POST">
+            <form action="index.php" method="POST">
                 <table class="form-table" border="0">
                     <tr>
                         <td width="150">NIM</td>
-                        <td>: <input type="text" name="nim" size="30" required></td>
+                        <td>: <input type="text" name="nim" size="30" required placeholder="Contoh: 2507421099"></td>
                     </tr>
                     <tr>
                         <td>Nama Lengkap</td>
@@ -265,9 +284,9 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
                             <select name="jurusan" required>
                                 <option value="">-- Pilih Jurusan --</option>
                                 <option value="Teknik Informatika">Teknik Informatika</option>
-                                <option value="Sistem Informasi">Sistem Informasi</option>
+                                <option value="Teknik Multimedia dan Jaringan">Teknik Multimedia dan Jaringan</option>
                                 <option value="Teknik Komputer">Teknik Komputer</option>
-                                <option value="Teknologi Multimedia">Teknologi Multimedia</option>
+                                <option value="Sistem Informasi">Sistem Informasi</option>
                             </select>
                         </td>
                     </tr>
@@ -296,7 +315,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
                     <th width="40" style="text-align: center;">No</th>
                     <th width="120">NIM</th>
                     <th>Nama Lengkap</th>
-                    <th width="180">Jurusan</th>
+                    <th width="200">Jurusan</th>
                     <th>Alamat</th>
                     <th width="130" style="text-align: center;">Aksi</th>
                 </tr>
@@ -314,9 +333,9 @@ $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
                         <td><?php echo htmlspecialchars($row['jurusan']); ?></td>
                         <td><?php echo htmlspecialchars($row['alamat']); ?></td>
                         <td style="text-align: center;">
-                            <a href="single-page.php?aksi=edit&id=<?php echo $row['id']; ?>">Ubah</a>
+                            <a href="index.php?aksi=edit&id=<?php echo $row['id']; ?>">Ubah</a>
                             &nbsp;|&nbsp;
-                            <a href="single-page.php?aksi=hapus&id=<?php echo $row['id']; ?>" 
+                            <a href="index.php?aksi=hapus&id=<?php echo $row['id']; ?>" 
                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                                 Hapus
                             </a>

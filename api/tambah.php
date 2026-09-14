@@ -10,7 +10,8 @@ if (isset($_POST['Submit'])) {
     $alamat  = trim($_POST['alamat'] ?? '');
 
     if (empty($nim) || empty($nama) || empty($jurusan) || empty($alamat)) {
-        $error = "Semua kolom formulir wajib diisi!";
+        header("Location: index.php?pesan=gagal_validasi");
+        exit();
     } else {
         $nim_safe     = mysqli_real_escape_string($koneksi, $nim);
         $nama_safe    = mysqli_real_escape_string($koneksi, $nama);
@@ -24,7 +25,13 @@ if (isset($_POST['Submit'])) {
             header("Location: index.php?pesan=sukses_tambah");
             exit();
         } else {
-            $error = "Gagal menyimpan ke database.";
+            if (mysqli_errno($koneksi) == 1062) {
+                header("Location: index.php?pesan=duplikat_nim");
+            } else {
+                $err = mysqli_error($koneksi);
+                header("Location: index.php?pesan=gagal_db&err=" . urlencode($err));
+            }
+            exit();
         }
     }
 }
@@ -46,12 +53,15 @@ if (isset($_POST['Submit'])) {
             padding: 0 15px;
         }
         h2 { margin-bottom: 15px; color: #222; }
-        .pesan-error {
+        .alert {
+            padding: 10px 14px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .alert-danger {
             background-color: #f8d7da;
             border: 1px solid #f5c6cb;
             color: #721c24;
-            padding: 10px 12px;
-            margin-bottom: 15px;
         }
         table {
             margin-top: 15px;
@@ -87,11 +97,7 @@ if (isset($_POST['Submit'])) {
 <body>
 
     <h2>Tambah Data Mahasiswa</h2>
-    <p><a href="index.php">&laquo; Kembali</a></p>
-
-    <?php if (!empty($error)): ?>
-        <div class="pesan-error"><?php echo $error; ?></div>
-    <?php endif; ?>
+    <p><a href="index.php">&laquo; Kembali ke Daftar</a></p>
 
     <form action="tambah.php" method="POST">
         <table border="0">
@@ -109,9 +115,9 @@ if (isset($_POST['Submit'])) {
                     <select name="jurusan" required>
                         <option value="">-- Pilih Jurusan --</option>
                         <option value="Teknik Informatika">Teknik Informatika</option>
-                        <option value="Sistem Informasi">Sistem Informasi</option>
+                        <option value="Teknik Multimedia dan Jaringan">Teknik Multimedia dan Jaringan</option>
                         <option value="Teknik Komputer">Teknik Komputer</option>
-                        <option value="Teknologi Multimedia">Teknologi Multimedia</option>
+                        <option value="Sistem Informasi">Sistem Informasi</option>
                     </select>
                 </td>
             </tr>

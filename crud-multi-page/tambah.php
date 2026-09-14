@@ -10,7 +10,7 @@
 
 <div class="container">
     <h2>Tambah Data Mahasiswa</h2>
-    <p><a href="index.php">&laquo; Kembali</a></p>
+    <p><a href="index.php">&laquo; Kembali ke Daftar</a></p>
 
     <form action="proses_tambah.php" method="POST">
         <table border="0">
@@ -28,9 +28,9 @@
                     <select name="jurusan" required>
                         <option value="">-- Pilih Jurusan --</option>
                         <option value="Teknik Informatika">Teknik Informatika</option>
-                        <option value="Sistem Informasi">Sistem Informasi</option>
+                        <option value="Teknik Multimedia dan Jaringan">Teknik Multimedia dan Jaringan</option>
                         <option value="Teknik Komputer">Teknik Komputer</option>
-                        <option value="Teknologi Multimedia">Teknologi Multimedia</option>
+                        <option value="Sistem Informasi">Sistem Informasi</option>
                     </select>
                 </td>
             </tr>

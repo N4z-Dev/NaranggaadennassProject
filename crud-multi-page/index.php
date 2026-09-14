@@ -14,11 +14,17 @@ if (!$hasil) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Mahasiswa</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
 <div class="container">
+    <div class="nav-mode">
+        <strong>Multi-Page</strong>
+        &nbsp;|&nbsp;
+        <a href="../crud-single-page/">Single-Page</a>
+    </div>
+
     <h2>Data Mahasiswa</h2>
 
     <?php if (isset($_GET['pesan'])): ?>
@@ -30,8 +36,10 @@ if (!$hasil) {
             <div class="alert alert-success">Data mahasiswa berhasil dihapus!</div>
         <?php elseif ($_GET['pesan'] == 'gagal_validasi'): ?>
             <div class="alert alert-danger">Semua form input wajib diisi!</div>
+        <?php elseif ($_GET['pesan'] == 'duplikat_nim'): ?>
+            <div class="alert alert-danger">Gagal menyimpan: <strong>NIM sudah terdaftar</strong> di database! Silakan gunakan NIM lain.</div>
         <?php elseif ($_GET['pesan'] == 'gagal_db'): ?>
-            <div class="alert alert-danger">Terjadi kesalahan pada database.</div>
+            <div class="alert alert-danger">Terjadi kesalahan pada database<?php echo !empty($_GET['err']) ? ': ' . htmlspecialchars($_GET['err']) : '.'; ?></div>
         <?php endif; ?>
     <?php endif; ?>
 
@@ -45,7 +53,7 @@ if (!$hasil) {
                 <th style="width: 40px; text-align: center;">No</th>
                 <th style="width: 120px;">NIM</th>
                 <th>Nama Lengkap</th>
-                <th style="width: 180px;">Jurusan</th>
+                <th style="width: 200px;">Jurusan</th>
                 <th>Alamat</th>
                 <th style="width: 130px; text-align: center;">Aksi</th>
             </tr>
