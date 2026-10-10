@@ -1,28 +1,12 @@
 {
   "version": 2,
   "functions": {
-    "api/**/*.php": {
+    "api/index.php": {
       "runtime": "vercel-php@0.9.0"
     }
   },
-  "rewrites": [
-    { "source": "/", "destination": "/api/mahasiswa/index.php" },
-    { "source": "/index.php", "destination": "/api/mahasiswa/index.php" },
-    { "source": "/mahasiswa", "destination": "/api/mahasiswa/index.php" },
-    { "source": "/mahasiswa/", "destination": "/api/mahasiswa/index.php" },
-    { "source": "/mahasiswa/index.php", "destination": "/api/mahasiswa/index.php" },
-    { "source": "/mahasiswa/tambah.php", "destination": "/api/mahasiswa/tambah.php" },
-    { "source": "/mahasiswa/proses_tambah.php", "destination": "/api/mahasiswa/proses_tambah.php" },
-    { "source": "/mahasiswa/edit.php", "destination": "/api/mahasiswa/edit.php" },
-    { "source": "/mahasiswa/proses_edit.php", "destination": "/api/mahasiswa/proses_edit.php" },
-    { "source": "/mahasiswa/hapus.php", "destination": "/api/mahasiswa/hapus.php" },
-    { "source": "/dosen", "destination": "/api/dosen/index.php" },
-    { "source": "/dosen/", "destination": "/api/dosen/index.php" },
-    { "source": "/dosen/index.php", "destination": "/api/dosen/index.php" },
-    { "source": "/dosen/tambah.php", "destination": "/api/dosen/tambah.php" },
-    { "source": "/dosen/proses_tambah.php", "destination": "/api/dosen/proses_tambah.php" },
-    { "source": "/dosen/edit.php", "destination": "/api/dosen/edit.php" },
-    { "source": "/dosen/proses_edit.php", "destination": "/api/dosen/proses_edit.php" },
-    { "source": "/dosen/hapus.php", "destination": "/api/dosen/hapus.php" }
+  "routes": [
+    { "src": "/style.css", "dest": "/style.css" },
+    { "src": "/(.*)", "dest": "/api/index.php" }
   ]
 }
