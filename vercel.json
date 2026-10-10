@@ -1,26 +1,28 @@
 {
   "version": 2,
   "functions": {
-    "api/*.php": {
+    "api/**/*.php": {
       "runtime": "vercel-php@0.9.0"
     }
   },
   "rewrites": [
-    { "source": "/", "destination": "/api/index.php" },
-    { "source": "/index.html", "destination": "/api/index.php" },
-    { "source": "/index.php", "destination": "/api/index.php" },
-    { "source": "/single-page.php", "destination": "/api/single-page.php" },
-    { "source": "/tambah.php", "destination": "/api/tambah.php" },
-    { "source": "/edit.php", "destination": "/api/edit.php" },
-    { "source": "/hapus.php", "destination": "/api/hapus.php" },
-    { "source": "/crud-multi-page", "destination": "/api/index.php" },
-    { "source": "/crud-multi-page/", "destination": "/api/index.php" },
-    { "source": "/crud-multi-page/index.php", "destination": "/api/index.php" },
-    { "source": "/crud-multi-page/tambah.php", "destination": "/api/tambah.php" },
-    { "source": "/crud-multi-page/edit.php", "destination": "/api/edit.php" },
-    { "source": "/crud-multi-page/hapus.php", "destination": "/api/hapus.php" },
-    { "source": "/crud-single-page", "destination": "/api/single-page.php" },
-    { "source": "/crud-single-page/", "destination": "/api/single-page.php" },
-    { "source": "/crud-single-page/index.php", "destination": "/api/single-page.php" }
+    { "source": "/", "destination": "/api/mahasiswa/index.php" },
+    { "source": "/index.php", "destination": "/api/mahasiswa/index.php" },
+    { "source": "/mahasiswa", "destination": "/api/mahasiswa/index.php" },
+    { "source": "/mahasiswa/", "destination": "/api/mahasiswa/index.php" },
+    { "source": "/mahasiswa/index.php", "destination": "/api/mahasiswa/index.php" },
+    { "source": "/mahasiswa/tambah.php", "destination": "/api/mahasiswa/tambah.php" },
+    { "source": "/mahasiswa/proses_tambah.php", "destination": "/api/mahasiswa/proses_tambah.php" },
+    { "source": "/mahasiswa/edit.php", "destination": "/api/mahasiswa/edit.php" },
+    { "source": "/mahasiswa/proses_edit.php", "destination": "/api/mahasiswa/proses_edit.php" },
+    { "source": "/mahasiswa/hapus.php", "destination": "/api/mahasiswa/hapus.php" },
+    { "source": "/dosen", "destination": "/api/dosen/index.php" },
+    { "source": "/dosen/", "destination": "/api/dosen/index.php" },
+    { "source": "/dosen/index.php", "destination": "/api/dosen/index.php" },
+    { "source": "/dosen/tambah.php", "destination": "/api/dosen/tambah.php" },
+    { "source": "/dosen/proses_tambah.php", "destination": "/api/dosen/proses_tambah.php" },
+    { "source": "/dosen/edit.php", "destination": "/api/dosen/edit.php" },
+    { "source": "/dosen/proses_edit.php", "destination": "/api/dosen/proses_edit.php" },
+    { "source": "/dosen/hapus.php", "destination": "/api/dosen/hapus.php" }
   ]
 }

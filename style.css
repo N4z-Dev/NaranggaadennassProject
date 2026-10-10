@@ -1,0 +1,193 @@
+/* Styling Aplikasi Web CRUD Mahasiswa & Dosen */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    max-width: 980px;
+    margin: 25px auto;
+    padding: 0 15px;
+}
+
+h2, h3 {
+    color: #222;
+    margin-bottom: 15px;
+}
+
+/* Navigasi Menu Tab */
+.navbar {
+    background-color: #f0f4f8;
+    border: 1px solid #ccd0d5;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.navbar a {
+    display: inline-block;
+    padding: 7px 16px;
+    color: #0056b3;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    margin-right: 5px;
+    border-radius: 3px;
+}
+
+.navbar a:hover {
+    background-color: #e2e8f0;
+}
+
+.navbar a.active {
+    background-color: #0056b3;
+    color: #ffffff !important;
+}
+
+/* Notifikasi / Alert */
+.alert {
+    padding: 10px 14px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+/* Tabel Data */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Tombol dan Link */
+a {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #0056b3;
+    color: #ffffff !important;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.btn:hover {
+    background-color: #004085;
+    text-decoration: none;
+}
+
+.btn-batal {
+    background-color: #6c757d;
+}
+
+.btn-batal:hover {
+    background-color: #5a6268;
+}
+
+/* Form Input */
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    max-width: 480px;
+    padding: 7px 10px;
+    font-size: 14px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="file"] {
+    font-size: 13px;
+}
+
+input[type="submit"],
+input[type="reset"],
+button {
+    padding: 7px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    background-color: #0056b3;
+    color: #ffffff;
+    border: 1px solid #004085;
+    border-radius: 3px;
+}
+
+input[type="submit"]:hover {
+    background-color: #004085;
+}
+
+/* Foto Thumbnail & Preview */
+.foto-tabel {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    display: block;
+    margin: 0 auto;
+}
+
+.foto-preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top: 6px;
+    display: block;
+}
